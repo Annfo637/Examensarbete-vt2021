@@ -13,17 +13,16 @@ import {
   StyledLabel,
   StyledInput,
   StyledButton,
+  PostContent,
+  PostButton,
 } from "../styles/CommonComponents";
-
-import { db } from "../firebase";
 import PostItem from "./PostItem";
 
 export default function PostListView() {
-  const { currentUser, logoutUser } = useContext(AuthContext);
-  //const { posts, getPosts } = useContext(PostContext);
+  const { currentUser, currentUserDB, logoutUser } = useContext(AuthContext);
+  const { posts, getPosts, addPost } = useContext(PostContext);
   const [error, setError] = useState("");
   const history = useHistory();
-  const [posts, setPosts] = useState([]);
   const postRef = useRef();
 
   async function handleLogout() {
@@ -36,20 +35,17 @@ export default function PostListView() {
     }
   }
 
-  function getPosts() {
-    db.collection("posts").onSnapshot((dbSnapshot) => {
-      const dbItems = [];
-      dbSnapshot.forEach((doc) => {
-        dbItems.push(doc.data());
-      });
-      console.log(dbItems);
-      setPosts(dbItems);
-    });
+  function handleAddPost() {
+    const author = currentUserDB.fullName;
+    const authorID = currentUser.uid;
+    const post = postRef.current.value;
+
+    addPost(author, authorID, post);
+    postRef.current.value = "";
   }
 
   useEffect(() => {
     getPosts();
-    console.log(posts);
   }, []);
 
   return (
@@ -59,43 +55,34 @@ export default function PostListView() {
         <ContainerItem>
           <strong>Inloggad som:</strong> {currentUser.email}
         </ContainerItem>
-        {/* <Link to="update-profile" className="btn btn-primary w-100 mt-2">
-          Uppdatera profil
-        </Link> */}
         <ContainerItem>
-          <Link to="update-profile" className="btn btn-primary w-100 mt-2">
-            Min sida
+          <Link to={`/user/${currentUser.uid}`}>
+            <StyledButton>Min sida</StyledButton>
           </Link>
         </ContainerItem>
         <ContainerItem>
-          <div className="w-100 text-center mt-2">
-            <Button variant="link" onClick={handleLogout}>
-              Logga ut
-            </Button>
-          </div>
+          <StyledButton onClick={handleLogout}>Logga ut</StyledButton>
         </ContainerItem>
       </UserContainer>
       <MakePostContainer>
         <ContainerItem vertical>
-          <textarea ref={postRef} placeholder="Skriv ditt inlägg här..." />
+          <PostContent ref={postRef} placeholder="Skriv ditt inlägg här..." />
         </ContainerItem>
         <ContainerItem vertical>
-          <StyledButton>Posta inlägg</StyledButton>
+          <PostButton onClick={handleAddPost}>Posta inlägg</PostButton>
         </ContainerItem>
       </MakePostContainer>
       <PostContainer>
         {posts &&
           posts.map((post, index) => {
             return (
-              <Card
+              <PostItem
                 key={index}
-                className="mb-2"
-                style={{ width: "80%", maxWidth: "800px" }}
-              >
-                <Card.Body>
-                  <PostItem author={post.author} post={post.post} />
-                </Card.Body>
-              </Card>
+                post={post}
+                timestamp={post.createdAt}
+                author={post.author}
+                content={post.post}
+              />
             );
           })}
       </PostContainer>

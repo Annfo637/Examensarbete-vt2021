@@ -19,7 +19,6 @@ export const UserContainer = styled.div`
 
 export const MakePostContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   max-height: 100px;
   align-items: center;
@@ -34,7 +33,6 @@ export const PostContainer = styled.div`
 
 export const ContainerItem = styled.div`
   display: inline-block;
-  //margin: 1em 0.3em;
   margin: ${(props) => (props.vertical ? "0.3em 1em" : "1em 0.3em")};
 `;
 

@@ -4,11 +4,14 @@ import { auth, db } from "../firebase";
 export const AuthContext = createContext({});
 
 export default function AuthContextProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserDB, setCurrentUserDB] = useState(null);
+
+  const dbUsers = db.collection("users");
 
   async function registerUser(name, email, password) {
     return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-      return db.collection("users").doc(cred.user.uid).set({
+      return dbUsers.doc(cred.user.uid).set({
         fullName: name,
       });
     });
@@ -19,6 +22,7 @@ export default function AuthContextProvider({ children }) {
   }
 
   function logoutUser() {
+    setCurrentUserDB(null);
     return auth.signOut();
   }
 
@@ -41,11 +45,13 @@ export default function AuthContextProvider({ children }) {
       setCurrentUser(user);
     });
 
-    return unsubscribe;
+    return unsubscribe; //döpa om till observer?
   }, []);
 
   const value = {
     currentUser,
+    currentUserDB,
+    setCurrentUserDB,
     registerUser,
     loginUser,
     logoutUser,

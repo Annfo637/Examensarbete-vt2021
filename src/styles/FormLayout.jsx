@@ -5,8 +5,7 @@ import Header from "../components/Header";
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 4rem;
-  //align-items: center;
+  padding-top: 1rem;
   min-height: 100vh;
 `;
 
