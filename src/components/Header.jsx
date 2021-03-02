@@ -27,7 +27,6 @@ const HeaderTitle = styled.h1`
 export default function Header() {
   return (
     <HeaderContainer>
-      //
       <HeaderImage src="../../images/colorhouses.jpg" alt="apartment houses" />
       {/* <HeaderImage
         src="../../images/squarewithsky.jpg"

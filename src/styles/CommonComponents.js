@@ -35,22 +35,27 @@ export const StyledButton = styled.button`
   width: ${(props) => (props.formButton ? "100%" : "auto")};
 `;
 
-export const DeleteButton = styled(StyledButton)`
-  //background-color: #cc8a53;
-  //background-color: #a76555;
-  background-color: #729380;
-  padding: 5px 10px;
-`;
-export const EditButton = styled(StyledButton)`
-  margin-right: 5px;
-  //background-color: #cbb49a;
-  background-color: #a8bb9e;
-  padding: 5px 10px;
-`;
+// export const DeleteButton = styled(StyledButton)`
+//   //background-color: #cc8a53;
+//   //background-color: #a76555;
+//   background-color: #729380;
+//   padding: 5px 10px;
+// `;
+// export const EditButton = styled(StyledButton)`
+//   margin-right: 5px;
+//   //background-color: #cbb49a;
+//   background-color: #a8bb9e;
+//   padding: 5px 10px;
+// `;
 
 export const PostButton = styled(StyledButton)`
   //background-color: #729380;
   background-color: #cbb49a;
+  padding: 5px 10px;
+`;
+
+export const ToggleButton = styled(StyledButton)`
+  background-color: #729380;
   padding: 5px 10px;
 `;
 

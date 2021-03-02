@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../components/Header";
 
 const FormContainer = styled.div`
+  margin-top: -100px;
   display: flex;
   justify-content: center;
   padding-top: 1rem;

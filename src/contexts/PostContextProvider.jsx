@@ -1,12 +1,11 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import firebase, { db } from "../firebase";
+import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { AuthContext } from "./AuthContextProvider";
 
 export const PostContext = createContext({});
 
 export default function PostContextProvider({ children }) {
-  const [currentPost, setCurrentPost] = useState();
   const [posts, setPosts] = useState(null);
   const { currentUser, currentUserDB, setCurrentUserDB } = useContext(
     AuthContext
@@ -30,7 +29,6 @@ export default function PostContextProvider({ children }) {
   //ADD POST
   function addPost(author, authorID, post) {
     console.log(author, authorID, post);
-    //const timestamp = db.FieldValue.serverTimestamp()
     const postDate = new Date().toLocaleString();
 
     const newPost = {

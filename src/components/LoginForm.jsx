@@ -12,10 +12,19 @@ import {
 export default function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { loginUser } = useContext(AuthContext);
+  const {
+    loginUser,
+    adminUsers,
+    currentUser,
+    isAdmin,
+    setIsAdmin,
+  } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  console.log(adminUsers);
+  console.log(currentUser);
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -26,7 +35,9 @@ export default function LoginForm() {
       setLoading(true);
       await loginUser(emailRef.current.value, passwordRef.current.value);
       setLoading(false);
-      history.push("/");
+      console.log("handleLogin isAdmin:", isAdmin);
+      isAdmin ? history.push("/admin") : history.push("/");
+      //history.push("/");
     } catch {
       setError("Det gick inte att logga in.");
     }
@@ -66,3 +77,11 @@ export default function LoginForm() {
     </>
   );
 }
+
+// redirects depending whether user is admin or not
+
+// console.log(currentUser); //null om man försöker logga in med ny användare utan att refresha sidan
+
+// console.log(checkForAdmin());
+// setIsAdmin(checkForAdmin());
+// console.log(isAdmin);

@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+
 import { Card, Button, Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import { PostContext } from "../contexts/PostContextProvider";
 import {
-  UserContainer,
   ContainerItem,
   MakePostContainer,
   PostContainer,
@@ -17,23 +16,13 @@ import {
   PostButton,
 } from "../styles/CommonComponents";
 import PostItem from "./PostItem";
+import UserMenu from "./UserMenu";
 
 export default function PostListView() {
-  const { currentUser, currentUserDB, logoutUser } = useContext(AuthContext);
+  const { currentUser, currentUserDB } = useContext(AuthContext);
   const { posts, getPosts, addPost } = useContext(PostContext);
-  const [error, setError] = useState("");
-  const history = useHistory();
-  const postRef = useRef();
 
-  async function handleLogout() {
-    setError("");
-    try {
-      await logoutUser();
-      history.push("/login");
-    } catch {
-      setError("Kunde inte logga ut.");
-    }
-  }
+  const postRef = useRef();
 
   function handleAddPost() {
     const author = currentUserDB.fullName;
@@ -50,20 +39,7 @@ export default function PostListView() {
 
   return (
     <>
-      <UserContainer>
-        {error && <Alert variant="danger">{error}</Alert>}
-        <ContainerItem>
-          <strong>Inloggad som:</strong> {currentUser.email}
-        </ContainerItem>
-        <ContainerItem>
-          <Link to={`/user/${currentUser.uid}`}>
-            <StyledButton>Min sida</StyledButton>
-          </Link>
-        </ContainerItem>
-        <ContainerItem>
-          <StyledButton onClick={handleLogout}>Logga ut</StyledButton>
-        </ContainerItem>
-      </UserContainer>
+      <UserMenu />
       <MakePostContainer>
         <ContainerItem vertical>
           <PostContent ref={postRef} placeholder="Skriv ditt inlägg här..." />

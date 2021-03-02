@@ -42,7 +42,8 @@ export default function RegisterForm() {
         passwordRef.current.value
       );
       setLoading(false);
-      history.push("/");
+      //Här ska istället ett meddelande med information visas.
+      //history.push("/");
     } catch {
       setError("Det gick inte att skapa ett konto.");
     }
