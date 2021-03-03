@@ -17,6 +17,7 @@ export default function RegisterForm() {
   const { registerUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [confirmation, setConfirmation] = useState("");
   const history = useHistory();
 
   async function handleRegister(e) {
@@ -42,8 +43,10 @@ export default function RegisterForm() {
         passwordRef.current.value
       );
       setLoading(false);
-      //Här ska istället ett meddelande med information visas.
-      //history.push("/");
+      //Alert med information visas.
+      setConfirmation(
+        "Tack för din registrering. Medlemskap godkänns inom 72 timmar, annars kontakta din admin."
+      );
     } catch {
       setError("Det gick inte att skapa ett konto.");
     }
@@ -55,6 +58,7 @@ export default function RegisterForm() {
         <Card.Body>
           <h2 className="text-center mb-4">Registrera dig här</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          {confirmation && <Alert variant="success">{confirmation}</Alert>}
           <Form onSubmit={handleRegister}>
             <Form.Group controlId="name">
               <Form.Label>För- och efternamn</Form.Label>

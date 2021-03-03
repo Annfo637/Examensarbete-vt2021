@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Card, Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
@@ -33,15 +33,22 @@ export default function LoginForm() {
       setError("");
       // disables button from more than one click while login is loading
       setLoading(true);
-      await loginUser(emailRef.current.value, passwordRef.current.value);
+      await loginUser(
+        emailRef.current.value,
+        passwordRef.current.value,
+        history
+      );
       setLoading(false);
-      console.log("handleLogin isAdmin:", isAdmin);
-      isAdmin ? history.push("/admin") : history.push("/");
+      //console.log("handleLogin isAdmin:", isAdmin);
+      // isAdmin ? history.push("/admin") : history.push("/");
       //history.push("/");
     } catch {
       setError("Det gick inte att logga in.");
     }
   }
+  // useEffect(() => {
+  //   isAdmin ? history.push("/admin") : history.push("/");
+  // }, [isAdmin]);
 
   return (
     <>

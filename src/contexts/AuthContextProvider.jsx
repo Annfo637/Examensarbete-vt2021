@@ -10,7 +10,7 @@ export default function AuthContextProvider({ children }) {
   const [pendingUsers, setPendingUsers] = useState(null);
   const [approvedUsers, setApprovedUsers] = useState(null);
   const [adminUsers, setAdminUsers] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null);
 
   const dbUsers = db.collection("users");
   const dbPending = db.collection("pendingUsers");
@@ -98,7 +98,7 @@ export default function AuthContextProvider({ children }) {
       });
   }
 
-  async function loginUser(email, password) {
+  async function loginUser(email, password, history) {
     return auth.signInWithEmailAndPassword(email, password).then((cred) => {
       console.log(cred);
       let adminID = [];
@@ -109,10 +109,17 @@ export default function AuthContextProvider({ children }) {
       });
       console.log("inloggad user är admin:", adminID.includes(cred.user.uid));
       setIsAdmin(adminID.includes(cred.user.uid));
-      console.log(isAdmin);
+      //raden nedan är null fast vi skickar in true på raden över
       //return isAdmin;
+      console.log("handleLogin isAdmin:", isAdmin);
+      adminID.includes(cred.user.uid)
+        ? history.push("/admin")
+        : history.push("/");
     });
   }
+  useEffect(() => {
+    console.log("useEffect", isAdmin);
+  }, [isAdmin]);
 
   function logoutUser() {
     setCurrentUserDB(null);
