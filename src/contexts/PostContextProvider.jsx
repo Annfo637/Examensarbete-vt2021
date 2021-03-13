@@ -28,7 +28,6 @@ export default function PostContextProvider({ children }) {
 
   //ADD POST
   function addPost(author, authorID, post) {
-    console.log(author, authorID, post);
     const postDate = new Date().toLocaleString();
 
     const newPost = {
@@ -45,6 +44,7 @@ export default function PostContextProvider({ children }) {
         console.log(err);
       });
   }
+
   //DELETE POST
   function deletePost(post) {
     console.log(post);

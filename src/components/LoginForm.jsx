@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Card, Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
@@ -12,19 +12,12 @@ import {
 export default function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const {
-    loginUser,
-    adminUsers,
-    currentUser,
-    isAdmin,
-    setIsAdmin,
-  } = useContext(AuthContext);
+  const { loginUser, adminUsers } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   console.log(adminUsers);
-  console.log(currentUser);
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -39,16 +32,11 @@ export default function LoginForm() {
         history
       );
       setLoading(false);
-      //console.log("handleLogin isAdmin:", isAdmin);
-      // isAdmin ? history.push("/admin") : history.push("/");
-      //history.push("/");
+      history.push("/");
     } catch {
       setError("Det gick inte att logga in.");
     }
   }
-  // useEffect(() => {
-  //   isAdmin ? history.push("/admin") : history.push("/");
-  // }, [isAdmin]);
 
   return (
     <>
@@ -84,11 +72,3 @@ export default function LoginForm() {
     </>
   );
 }
-
-// redirects depending whether user is admin or not
-
-// console.log(currentUser); //null om man försöker logga in med ny användare utan att refresha sidan
-
-// console.log(checkForAdmin());
-// setIsAdmin(checkForAdmin());
-// console.log(isAdmin);

@@ -5,7 +5,7 @@ import {
   StyledLabel,
   StyledInput,
   StyledButton,
-  IconWrapper,
+  ButtonIconWrapper,
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -21,16 +21,12 @@ export default function PostItem({ post, timestamp, author, content }) {
           <i>{timestamp}</i>
           <h5>{author}</h5>
           <p>{content}</p>
-          <IconWrapper>
-            <EditIcon fontSize="small" onClick={() => editPost(post)}>
-              Redigera
-            </EditIcon>
-          </IconWrapper>
-          <IconWrapper>
-            <DeleteIcon fontSize="small" onClick={() => deletePost(post)}>
-              Radera
-            </DeleteIcon>
-          </IconWrapper>
+          <ButtonIconWrapper>
+            <EditIcon fontSize="small" onClick={() => editPost(post)} />
+          </ButtonIconWrapper>
+          <ButtonIconWrapper>
+            <DeleteIcon fontSize="small" onClick={() => deletePost(post)} />
+          </ButtonIconWrapper>
         </Card.Body>
       </Card>
     </>

@@ -1,6 +1,16 @@
 import React, { useContext } from "react";
+import styled from "styled-components";
 import { Table } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import {
+  StyledButton,
+  DeleteButton,
+  ButtonIconWrapper,
+} from "../styles/CommonComponents";
+
+const ButtonWrapper = styled.div`
+  margin-right: 0.5em;
+`;
 
 export default function UserTable({ users, type }) {
   const { approveUser, makeAdminUser, removeAdminUser } = useContext(
@@ -11,28 +21,42 @@ export default function UserTable({ users, type }) {
     if (type === "pending") {
       return (
         <>
-          <button onClick={() => approveUser(user)}>Godkänn användare</button>
-          <button>Radera</button>
+          <ButtonIconWrapper>
+            <StyledButton onClick={() => approveUser(user)}>
+              Godkänn användare
+            </StyledButton>
+          </ButtonIconWrapper>
+          <ButtonIconWrapper>
+            <DeleteButton>Radera</DeleteButton>
+          </ButtonIconWrapper>
         </>
       );
     }
     if (type === "approved") {
       return (
         <>
-          <button onClick={() => makeAdminUser(user)}>
-            Ge adminbehörighet
-          </button>
-          <button>Radera</button>
+          <ButtonIconWrapper>
+            <StyledButton onClick={() => makeAdminUser(user)}>
+              Ge adminbehörighet
+            </StyledButton>
+          </ButtonIconWrapper>
+          <ButtonIconWrapper>
+            <DeleteButton>Radera</DeleteButton>
+          </ButtonIconWrapper>
         </>
       );
     }
     if (type === "admin") {
       return (
         <>
-          <button onClick={() => removeAdminUser(user)}>
-            Ta bort adminbehörighet
-          </button>
-          <button>Radera</button>
+          <ButtonIconWrapper>
+            <StyledButton onClick={() => removeAdminUser(user)}>
+              Ta bort adminbehörighet
+            </StyledButton>
+          </ButtonIconWrapper>
+          <ButtonIconWrapper>
+            <DeleteButton>Radera</DeleteButton>
+          </ButtonIconWrapper>
         </>
       );
     }

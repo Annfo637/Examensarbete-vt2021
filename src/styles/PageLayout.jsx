@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
+import NavBar from "../components/NavBar";
 
 const PageContainer = styled.div`
+  //<main>?
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -40,7 +42,10 @@ export default function PageLayout({ children }) {
   return (
     <>
       <Header />
-      <PageContainer>{children}</PageContainer>
+      <PageContainer>
+        <NavBar />
+        {children}
+      </PageContainer>
     </>
   );
 }

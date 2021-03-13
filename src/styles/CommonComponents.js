@@ -26,8 +26,10 @@ export const StyledButton = styled.button`
   //display: inline;
   color: white;
   //background-color: #5b5f8e;
-  background-color: #729380;
+  //background-color: #729380;
   //background-color: #5e9abb;
+  //background-color: #85766d;
+  background-color: #456c7e;
   padding: 5px 20px;
   border: transparent;
   border-radius: 5px;
@@ -35,12 +37,11 @@ export const StyledButton = styled.button`
   width: ${(props) => (props.formButton ? "100%" : "auto")};
 `;
 
-// export const DeleteButton = styled(StyledButton)`
-//   //background-color: #cc8a53;
-//   //background-color: #a76555;
-//   background-color: #729380;
-//   padding: 5px 10px;
-// `;
+export const DeleteButton = styled(StyledButton)`
+  //background-color: #cc8a53;
+  //background-color: #a76555;
+  background-color: #916b60;
+`;
 // export const EditButton = styled(StyledButton)`
 //   margin-right: 5px;
 //   //background-color: #cbb49a;
@@ -50,7 +51,8 @@ export const StyledButton = styled.button`
 
 export const PostButton = styled(StyledButton)`
   //background-color: #729380;
-  background-color: #cbb49a;
+  //background-color: #cbb49a;
+  background-color: #85766d;
   padding: 5px 10px;
 `;
 
@@ -59,7 +61,7 @@ export const ToggleButton = styled(StyledButton)`
   padding: 5px 10px;
 `;
 
-export const IconWrapper = styled.div`
+export const ButtonIconWrapper = styled.div`
   display: inline-block;
   margin: 0 3px;
   :hover {

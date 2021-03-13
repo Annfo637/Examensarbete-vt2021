@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
-import { Card, Button, Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import { PostContext } from "../contexts/PostContextProvider";
 import {
@@ -16,7 +15,6 @@ import {
   PostButton,
 } from "../styles/CommonComponents";
 import PostItem from "./PostItem";
-import UserMenu from "./UserMenu";
 
 export default function PostListView() {
   const { currentUser, currentUserDB } = useContext(AuthContext);
@@ -39,12 +37,11 @@ export default function PostListView() {
 
   return (
     <>
-      <UserMenu />
       <MakePostContainer>
-        <ContainerItem vertical>
+        <ContainerItem>
           <PostContent ref={postRef} placeholder="Skriv ditt inlägg här..." />
         </ContainerItem>
-        <ContainerItem vertical>
+        <ContainerItem>
           <PostButton onClick={handleAddPost}>Posta inlägg</PostButton>
         </ContainerItem>
       </MakePostContainer>
