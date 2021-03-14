@@ -52,8 +52,10 @@ export default function PostListView() {
               <PostItem
                 key={index}
                 post={post}
+                postID={post.postID}
                 timestamp={post.createdAt}
                 author={post.author}
+                authorID={post.authorID}
                 content={post.post}
               />
             );

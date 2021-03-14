@@ -48,7 +48,7 @@ export default function AdminTabs() {
         </Tab>
 
         <Tab onClick={handleClick} active={active === 1} id={1}>
-          Godkända medlemmar
+          Godkända användare
         </Tab>
 
         <Tab onClick={handleClick} active={active === 2} id={2}>

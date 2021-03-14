@@ -9,33 +9,35 @@ import {
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { PostContext } from "../contexts/PostContextProvider";
+import { CommentContext } from "../contexts/CommentContextProvider";
 import { AuthContext } from "../contexts/AuthContextProvider";
-import CommentList from "./CommentList";
-import CommentContextProvider from "../contexts/CommentContextProvider";
 
-export default function PostItem({
-  post,
-  postID,
-  timestamp,
+export default function CommentItem({
+  comment,
+  commentID,
   author,
   authorID,
   content,
 }) {
-  const { posts, editPost, deletePost } = useContext(PostContext);
+  const { editComment, deleteComment } = useContext(CommentContext);
   const { currentUser, isAdmin } = useContext(AuthContext);
+
+  console.log(comment, commentID, author, authorID, content);
 
   //Behöver skapa en input för edit att skicka med i funktionen
 
-  function allowUserEditPost() {
+  function allowUserEditComment() {
     if (isAdmin || currentUser.uid === authorID) {
       return (
         <>
           <ButtonIconWrapper>
-            <EditIcon fontSize="small" onClick={() => editPost(post)} />
+            <EditIcon fontSize="small" onClick={() => editComment(comment)} />
           </ButtonIconWrapper>
           <ButtonIconWrapper>
-            <DeleteIcon fontSize="small" onClick={() => deletePost(post)} />
+            <DeleteIcon
+              fontSize="small"
+              onClick={() => deleteComment(comment)}
+            />
           </ButtonIconWrapper>
         </>
       );
@@ -43,16 +45,14 @@ export default function PostItem({
   }
 
   return (
-    <CommentContextProvider>
-      <Card className="mb-2" style={{ width: "80%", maxWidth: "800px" }}>
+    <>
+      <Card className="mb-2" style={{ width: "50%", maxWidth: "800px" }}>
         <Card.Body>
-          <i>{timestamp}</i>
-          {allowUserEditPost()}
+          {allowUserEditComment()}
           <h5>{author}</h5>
           <p>{content}</p>
-          <CommentList post={post} />
         </Card.Body>
       </Card>
-    </CommentContextProvider>
+    </>
   );
 }

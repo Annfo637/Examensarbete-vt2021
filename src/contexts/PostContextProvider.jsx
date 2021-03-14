@@ -12,6 +12,8 @@ export default function PostContextProvider({ children }) {
   );
 
   const dbPosts = db.collection("posts");
+  const dbComments = db.collection("comments");
+  console.log(dbPosts);
   const dbUsers = db.collection("users");
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function PostContextProvider({ children }) {
   //DELETE POST
   function deletePost(post) {
     console.log(post);
-
+    //delete the post
     dbPosts
       .doc(post.postID)
       .delete()
@@ -56,6 +58,20 @@ export default function PostContextProvider({ children }) {
         console.error(err);
       });
     console.log("delete");
+    //delete all comments on post
+
+    dbComments.where("postID", "==", post.postID).onSnapshot((dbSnapshot) => {
+      console.log(dbSnapshot);
+      dbSnapshot.forEach((doc) => {
+        dbComments
+          .doc(doc.data().commentID)
+          .delete()
+          .catch((err) => {
+            console.error(err);
+          });
+        console.log("delete comments");
+      });
+    });
   }
   //EDIT POST
   function editPost(post, content) {
