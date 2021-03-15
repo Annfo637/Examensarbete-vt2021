@@ -27,21 +27,19 @@ export default function CommentList({ post }) {
   const commentRef = useRef();
 
   //GET ALL COMMENTS IN A POST
-  function getComments(postID) {
-    const dbPostComments = dbComments.where("postID", "==", postID);
+  function getComments() {
+    dbComments
+      .where("postID", "==", postID)
+      .orderBy("createdAt", "desc")
+      .onSnapshot((dbSnapshot) => {
+        const dbItems = [];
 
-    console.log(postID, dbPostComments);
-
-    dbPostComments.orderBy("createdAt", "desc").onSnapshot((dbSnapshot) => {
-      const dbItems = [];
-
-      dbSnapshot.forEach((doc) => {
-        console.log("snap ", doc);
-        dbItems.push(doc.data());
+        dbSnapshot.forEach((doc) => {
+          dbItems.push(doc.data());
+        });
+        console.log("getComments ", dbItems);
+        setCommentList(dbItems);
       });
-      console.log("getComments ", dbItems);
-      setCommentList(dbItems);
-    });
   }
 
   function handleAddComment() {
@@ -56,7 +54,7 @@ export default function CommentList({ post }) {
   }
 
   useEffect(() => {
-    getComments(postID);
+    getComments();
   }, []);
 
   return (
@@ -74,18 +72,24 @@ export default function CommentList({ post }) {
       </MakePostContainer>
       <PostContainer>
         {commentList &&
-          commentList.map((comment, index) => {
-            return (
-              <CommentItem
-                key={index}
-                comment={comment}
-                commentID={comment.commentID}
-                author={comment.author}
-                authorID={comment.authorID}
-                content={comment.comment}
-              />
-            );
-          })}
+          commentList
+            .filter((comment) => {
+              return postID === comment.postID;
+            })
+            .map((comment, index) => {
+              return (
+                <>
+                  <CommentItem
+                    key={index}
+                    comment={comment}
+                    commentID={comment.commentID}
+                    author={comment.author}
+                    authorID={comment.authorID}
+                    content={comment.comment}
+                  />
+                </>
+              );
+            })}
       </PostContainer>
     </>
   );

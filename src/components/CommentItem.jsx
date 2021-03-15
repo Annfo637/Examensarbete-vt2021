@@ -12,6 +12,11 @@ import EditIcon from "@material-ui/icons/Edit";
 import { CommentContext } from "../contexts/CommentContextProvider";
 import { AuthContext } from "../contexts/AuthContextProvider";
 
+const CommentHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export default function CommentItem({
   comment,
   commentID,
@@ -29,7 +34,7 @@ export default function CommentItem({
   function allowUserEditComment() {
     if (isAdmin || currentUser.uid === authorID) {
       return (
-        <>
+        <div>
           <ButtonIconWrapper>
             <EditIcon fontSize="small" onClick={() => editComment(comment)} />
           </ButtonIconWrapper>
@@ -39,7 +44,7 @@ export default function CommentItem({
               onClick={() => deleteComment(comment)}
             />
           </ButtonIconWrapper>
-        </>
+        </div>
       );
     }
   }
@@ -47,11 +52,13 @@ export default function CommentItem({
   return (
     <>
       <Card className="mb-2" style={{ width: "50%", maxWidth: "800px" }}>
-        <Card.Body>
+        <CommentHeading>
+          <span>
+            <b>{author}</b>
+          </span>
           {allowUserEditComment()}
-          <h5>{author}</h5>
-          <p>{content}</p>
-        </Card.Body>
+        </CommentHeading>
+        <p>{content}</p>
       </Card>
     </>
   );
