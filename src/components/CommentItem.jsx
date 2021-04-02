@@ -3,10 +3,11 @@ import styled from "styled-components";
 import {
   StyledLabel,
   StyledInput,
-  StyledButton,
+  EditButton,
   ButtonIconWrapper,
   MyCard,
-  PostInput,
+  CommentInput,
+  EditWrapper,
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -23,21 +24,11 @@ const CommentCard = styled(MyCard)`
   padding: 5px;
 `;
 
-const EditWrapper = styled.div`
-  padding: 5px;
-  border: 1px solid #7d5e5e;
-  border-radius: 5px;
-`;
-
 export default function CommentItem({ comment }) {
   const { editComment, deleteComment } = useContext(CommentContext);
   const { currentUser, isAdmin } = useContext(AuthContext);
   const [showEdit, setShowEdit] = useState(false);
   const [commentToUpdate, setCommentToUpdate] = useState(comment.comment);
-
-  //console.log(comment, commentID, author, authorID, content);
-
-  //Behöver skapa en input för edit att skicka med i funktionen
 
   function allowUserEditComment() {
     if (isAdmin || currentUser.uid === comment.authorID) {
@@ -61,12 +52,12 @@ export default function CommentItem({ comment }) {
     if (showEdit) {
       return (
         <EditWrapper>
-          <PostInput
+          <CommentInput
             value={commentToUpdate}
             onChange={(e) => setCommentToUpdate(e.target.value)}
           />
-          <StyledButton onClick={() => setShowEdit(false)}>Avbryt</StyledButton>
-          <StyledButton onClick={() => submitEdit()}>Spara</StyledButton>
+          <EditButton onClick={() => setShowEdit(false)}>Avbryt</EditButton>
+          <EditButton onClick={() => submitEdit()}>Spara</EditButton>
         </EditWrapper>
       );
     } else {

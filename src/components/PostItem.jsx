@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
-import styled from "styled-components";
 import {
   StyledLabel,
   StyledInput,
-  StyledButton,
+  EditButton,
   ButtonIconWrapper,
   MyCard,
   PostInput,
+  EditWrapper,
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -14,12 +14,6 @@ import { PostContext } from "../contexts/PostContextProvider";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import CommentList from "./CommentList";
 import CommentContextProvider from "../contexts/CommentContextProvider";
-
-const EditWrapper = styled.div`
-  padding: 5px;
-  border: 1px solid #7d5e5e;
-  border-radius: 5px;
-`;
 
 export default function PostItem({ post }) {
   const { editPost, deletePost } = useContext(PostContext);
@@ -50,8 +44,8 @@ export default function PostItem({ post }) {
             value={postToUpdate}
             onChange={(e) => setPostToUpdate(e.target.value)}
           />
-          <StyledButton onClick={() => setShowEdit(false)}>Avbryt</StyledButton>
-          <StyledButton onClick={() => submitEdit()}>Spara</StyledButton>
+          <EditButton onClick={() => setShowEdit(false)}>Avbryt</EditButton>
+          <EditButton onClick={() => submitEdit()}>Spara</EditButton>
         </EditWrapper>
       );
     } else {

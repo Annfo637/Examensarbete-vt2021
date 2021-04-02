@@ -22,6 +22,17 @@ export const PostInput = styled.textarea`
   border-radius: 5px;
 `;
 
+export const CommentInput = styled(PostInput)`
+  width: 100%;
+`;
+
+export const EditWrapper = styled.div`
+  padding: 5px;
+  border: 1px solid #423c45;
+  border-radius: 5px;
+`;
+
+// BUTTONS
 export const StyledButton = styled.button`
   //display: inline;
   color: white;
@@ -29,6 +40,8 @@ export const StyledButton = styled.button`
   padding: 5px 20px;
   border: transparent;
   border-radius: 15px;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
   font-weight: bold;
   width: ${(props) => (props.formButton ? "100%" : "auto")};
 `;
@@ -40,6 +53,14 @@ export const DeleteButton = styled(StyledButton)`
 export const PostButton = styled(StyledButton)`
   background-color: #8d93a1;
   padding: 5px 10px;
+`;
+
+export const EditButton = styled(StyledButton)`
+  background-color: #8d93a1;
+  padding: 2px 7px;
+  margin: 0 2px;
+  font-weight: normal;
+  font-size: 0.85rem;
 `;
 
 export const ToggleButton = styled(StyledButton)`
