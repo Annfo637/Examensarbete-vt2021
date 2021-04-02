@@ -47,7 +47,6 @@ export default function CommentContextProvider({ children }) {
   //EDIT COMMENT
   function editComment(comment, content) {
     //const dbPostComments = dbComments.where("postID", "==", comment.postID);
-
     const updatedComment = {
       comment: content,
     };
@@ -81,6 +80,7 @@ export default function CommentContextProvider({ children }) {
   const value = {
     addComment,
     deleteComment,
+    editComment,
   };
 
   return (

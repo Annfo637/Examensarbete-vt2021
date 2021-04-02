@@ -14,7 +14,7 @@ export const StyledInput = styled.input`
   border-radius: 5px;
 `;
 
-export const PostContent = styled.textarea`
+export const PostInput = styled.textarea`
   margin-bottom: 15px;
   padding: 5px;
   width: 35vw;
@@ -25,39 +25,26 @@ export const PostContent = styled.textarea`
 export const StyledButton = styled.button`
   //display: inline;
   color: white;
-  //background-color: #5b5f8e;
-  //background-color: #729380;
-  //background-color: #5e9abb;
-  //background-color: #85766d;
-  background-color: #456c7e;
+  background-color: #423c45;
   padding: 5px 20px;
   border: transparent;
-  border-radius: 5px;
+  border-radius: 15px;
   font-weight: bold;
   width: ${(props) => (props.formButton ? "100%" : "auto")};
 `;
 
 export const DeleteButton = styled(StyledButton)`
-  //background-color: #cc8a53;
-  //background-color: #a76555;
-  background-color: #916b60;
+  background-color: #7d5e5e;
 `;
-// export const EditButton = styled(StyledButton)`
-//   margin-right: 5px;
-//   //background-color: #cbb49a;
-//   background-color: #a8bb9e;
-//   padding: 5px 10px;
-// `;
 
 export const PostButton = styled(StyledButton)`
-  //background-color: #729380;
-  //background-color: #cbb49a;
-  background-color: #85766d;
+  background-color: #8d93a1;
   padding: 5px 10px;
 `;
 
 export const ToggleButton = styled(StyledButton)`
-  background-color: #729380;
+  background-color: transparent;
+  color: #8d93a1;
   padding: 5px 10px;
 `;
 
@@ -67,4 +54,18 @@ export const ButtonIconWrapper = styled.div`
   :hover {
     cursor: pointer;
   }
+`;
+
+export const MyCard = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-width: 0;
+  max-width: 800px;
+  margin-bottom: 1em;
+  padding: 1em 15%;
+  background-color: #fff;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
 `;

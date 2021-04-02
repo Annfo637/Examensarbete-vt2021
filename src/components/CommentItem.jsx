@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { Card, Button, Alert } from "react-bootstrap";
 import {
   StyledLabel,
   StyledInput,
   StyledButton,
   ButtonIconWrapper,
+  MyCard,
+  PostInput,
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -17,26 +18,33 @@ const CommentHeading = styled.div`
   justify-content: space-between;
 `;
 
-export default function CommentItem({
-  comment,
-  commentID,
-  author,
-  authorID,
-  content,
-}) {
+const CommentCard = styled(MyCard)`
+  width: 80%;
+  padding: 5px;
+`;
+
+const EditWrapper = styled.div`
+  padding: 5px;
+  border: 1px solid #7d5e5e;
+  border-radius: 5px;
+`;
+
+export default function CommentItem({ comment }) {
   const { editComment, deleteComment } = useContext(CommentContext);
   const { currentUser, isAdmin } = useContext(AuthContext);
+  const [showEdit, setShowEdit] = useState(false);
+  const [commentToUpdate, setCommentToUpdate] = useState(comment.comment);
 
-  console.log(comment, commentID, author, authorID, content);
+  //console.log(comment, commentID, author, authorID, content);
 
   //Behöver skapa en input för edit att skicka med i funktionen
 
   function allowUserEditComment() {
-    if (isAdmin || currentUser.uid === authorID) {
+    if (isAdmin || currentUser.uid === comment.authorID) {
       return (
         <div>
           <ButtonIconWrapper>
-            <EditIcon fontSize="small" onClick={() => editComment(comment)} />
+            <EditIcon fontSize="small" onClick={() => setShowEdit(true)} />
           </ButtonIconWrapper>
           <ButtonIconWrapper>
             <DeleteIcon
@@ -49,17 +57,40 @@ export default function CommentItem({
     }
   }
 
+  function renderEditableComment() {
+    if (showEdit) {
+      return (
+        <EditWrapper>
+          <PostInput
+            value={commentToUpdate}
+            onChange={(e) => setCommentToUpdate(e.target.value)}
+          />
+          <StyledButton onClick={() => setShowEdit(false)}>Avbryt</StyledButton>
+          <StyledButton onClick={() => submitEdit()}>Spara</StyledButton>
+        </EditWrapper>
+      );
+    } else {
+      return <p>{comment.comment}</p>;
+    }
+  }
+
+  function submitEdit() {
+    console.log(comment, commentToUpdate);
+    editComment(comment, commentToUpdate);
+    setShowEdit(false);
+  }
+
   return (
     <>
-      <Card className="mb-2" style={{ width: "50%", maxWidth: "800px" }}>
+      <CommentCard>
         <CommentHeading>
           <span>
-            <b>{author}</b>
+            <b>{comment.author}</b>
           </span>
           {allowUserEditComment()}
         </CommentHeading>
-        <p>{content}</p>
-      </Card>
+        {renderEditableComment()}
+      </CommentCard>
     </>
   );
 }

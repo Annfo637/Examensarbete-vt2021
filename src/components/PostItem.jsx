@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { Card, Button, Alert } from "react-bootstrap";
 import {
   StyledLabel,
   StyledInput,
   StyledButton,
   ButtonIconWrapper,
+  MyCard,
+  PostInput,
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -14,25 +15,24 @@ import { AuthContext } from "../contexts/AuthContextProvider";
 import CommentList from "./CommentList";
 import CommentContextProvider from "../contexts/CommentContextProvider";
 
-export default function PostItem({
-  post,
-  postID,
-  timestamp,
-  author,
-  authorID,
-  content,
-}) {
-  const { posts, editPost, deletePost } = useContext(PostContext);
-  const { currentUser, isAdmin } = useContext(AuthContext);
+const EditWrapper = styled.div`
+  padding: 5px;
+  border: 1px solid #7d5e5e;
+  border-radius: 5px;
+`;
 
-  //Behöver skapa en input för edit att skicka med i funktionen
+export default function PostItem({ post }) {
+  const { editPost, deletePost } = useContext(PostContext);
+  const { currentUser, isAdmin } = useContext(AuthContext);
+  const [showEdit, setShowEdit] = useState(false);
+  const [postToUpdate, setPostToUpdate] = useState(post.post);
 
   function allowUserEditPost() {
-    if (isAdmin || currentUser.uid === authorID) {
+    if (isAdmin || currentUser.uid === post.authorID) {
       return (
         <>
           <ButtonIconWrapper>
-            <EditIcon fontSize="small" onClick={() => editPost(post)} />
+            <EditIcon fontSize="small" onClick={() => setShowEdit(true)} />
           </ButtonIconWrapper>
           <ButtonIconWrapper>
             <DeleteIcon fontSize="small" onClick={() => deletePost(post)} />
@@ -42,17 +42,40 @@ export default function PostItem({
     }
   }
 
+  function renderEditablePost() {
+    if (showEdit) {
+      return (
+        <EditWrapper>
+          <PostInput
+            value={postToUpdate}
+            onChange={(e) => setPostToUpdate(e.target.value)}
+          />
+          <StyledButton onClick={() => setShowEdit(false)}>Avbryt</StyledButton>
+          <StyledButton onClick={() => submitEdit()}>Spara</StyledButton>
+        </EditWrapper>
+      );
+    } else {
+      return <p>{post.post}</p>;
+    }
+  }
+
+  function submitEdit() {
+    console.log(post, postToUpdate);
+    editPost(post, postToUpdate);
+    setShowEdit(false);
+  }
+
   return (
     <CommentContextProvider>
-      <Card className="mb-2" style={{ width: "80%", maxWidth: "800px" }}>
-        <Card.Body>
-          <i>{timestamp}</i>
+      <MyCard>
+        <div>
+          <i>{post.createdAt}</i>
           {allowUserEditPost()}
-          <h5>{author}</h5>
-          <p>{content}</p>
-          <CommentList post={post} />
-        </Card.Body>
-      </Card>
+        </div>
+        <h5>{post.author}</h5>
+        {renderEditablePost()}
+        <CommentList post={post} />
+      </MyCard>
     </CommentContextProvider>
   );
 }

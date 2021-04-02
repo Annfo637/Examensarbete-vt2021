@@ -15,7 +15,6 @@ const NavContainer = styled.div`
 const NavList = styled.ul`
   display: flex;
   justify-content: center;
-  //max-height: 100px;
   align-items: center;
 `;
 const NavItem = styled.li`

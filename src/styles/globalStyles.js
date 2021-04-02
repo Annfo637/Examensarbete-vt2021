@@ -1,5 +1,5 @@
 /* fonts, colors etc used globally in the app */
-import React from "react";
+
 import { createGlobalStyle } from "styled-components";
 import "./fontImports.css";
 

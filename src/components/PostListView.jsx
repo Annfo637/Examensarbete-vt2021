@@ -11,8 +11,8 @@ import {
   StyledLabel,
   StyledInput,
   StyledButton,
-  PostContent,
   PostButton,
+  PostInput,
 } from "../styles/CommonComponents";
 import PostItem from "./PostItem";
 
@@ -39,7 +39,7 @@ export default function PostListView() {
     <>
       <MakePostContainer>
         <ContainerItem>
-          <PostContent ref={postRef} placeholder="Skriv ditt inlägg här..." />
+          <PostInput ref={postRef} placeholder="Skriv ditt inlägg här..." />
         </ContainerItem>
         <ContainerItem>
           <PostButton onClick={handleAddPost}>Posta inlägg</PostButton>
@@ -48,17 +48,7 @@ export default function PostListView() {
       <PostContainer>
         {posts &&
           posts.map((post, index) => {
-            return (
-              <PostItem
-                key={index}
-                post={post}
-                postID={post.postID}
-                timestamp={post.createdAt}
-                author={post.author}
-                authorID={post.authorID}
-                content={post.post}
-              />
-            );
+            return <PostItem key={index} post={post} />;
           })}
       </PostContainer>
     </>

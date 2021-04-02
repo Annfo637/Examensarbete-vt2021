@@ -27,7 +27,7 @@ export const MakePostContainer = styled.div`
 `;
 
 export const PostContainer = styled.div`
-  margin-top: 2em;
+  // article?
   display: flex;
   flex-direction: column;
   align-items: center;

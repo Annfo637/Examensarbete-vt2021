@@ -1,5 +1,5 @@
 import React, { useRef, useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form, Card, Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import {
@@ -18,7 +18,6 @@ export default function RegisterForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState("");
-  const history = useHistory();
 
   async function handleRegister(e) {
     e.preventDefault();

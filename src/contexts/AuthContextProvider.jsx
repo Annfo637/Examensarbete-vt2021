@@ -97,9 +97,8 @@ export default function AuthContextProvider({ children }) {
         console.log(err);
       });
   }
-  //login with firebase.auth and redirects depending on
-  //whether user is in admin db-collection or not
-  async function loginUser(email, password, history) {
+
+  async function loginUser(email, password) {
     return auth.signInWithEmailAndPassword(email, password).then((cred) => {
       let adminID = [];
       adminUsers.forEach((user) => {
@@ -107,9 +106,6 @@ export default function AuthContextProvider({ children }) {
       });
       console.log("inloggad user är admin:", adminID.includes(cred.user.uid));
       setIsAdmin(adminID.includes(cred.user.uid));
-      // adminID.includes(cred.user.uid)
-      //   ? history.push("/admin")
-      //   : history.push("/");
     });
   }
 
@@ -170,12 +166,12 @@ export default function AuthContextProvider({ children }) {
   }, [isAdmin]);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const authObserver = auth.onAuthStateChanged((user) => {
       console.log(user);
       setCurrentUser(user);
     });
     getAdminUsers();
-    return unsubscribe; //döpa om till observer?
+    return authObserver;
   }, []);
 
   const value = {

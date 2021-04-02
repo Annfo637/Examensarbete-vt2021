@@ -8,10 +8,6 @@ import {
   ButtonIconWrapper,
 } from "../styles/CommonComponents";
 
-const ButtonWrapper = styled.div`
-  margin-right: 0.5em;
-`;
-
 export default function UserTable({ users, type }) {
   const { approveUser, makeAdminUser, removeAdminUser } = useContext(
     AuthContext

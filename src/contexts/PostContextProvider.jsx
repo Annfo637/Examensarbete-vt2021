@@ -7,7 +7,7 @@ export const PostContext = createContext({});
 
 export default function PostContextProvider({ children }) {
   const [posts, setPosts] = useState(null);
-  const { currentUser, currentUserDB, setCurrentUserDB } = useContext(
+  const { currentUser, currentUserDB, setCurrentUserDB, isAdmin } = useContext(
     AuthContext
   );
 
@@ -15,9 +15,23 @@ export default function PostContextProvider({ children }) {
   const dbComments = db.collection("comments");
   console.log(dbPosts);
   const dbUsers = db.collection("users");
+  const dbAdmin = db.collection("adminUsers");
 
   useEffect(() => {
-    currentUser &&
+    currentUser && checkTypeOfUser();
+  }, []);
+
+  function checkTypeOfUser() {
+    if (isAdmin) {
+      dbAdmin
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) => {
+          console.log("hej admin");
+          setCurrentUserDB(doc.data());
+        });
+      console.log(currentUserDB);
+    } else {
       dbUsers
         .doc(currentUser.uid)
         .get()
@@ -25,12 +39,13 @@ export default function PostContextProvider({ children }) {
           console.log("hej");
           setCurrentUserDB(doc.data());
         });
-    console.log(currentUserDB);
-  }, []);
+      console.log(currentUserDB);
+    }
+  }
 
-  //ADD POST
+  // CRUD functions for posts
   function addPost(author, authorID, post) {
-    const postDate = new Date().toLocaleString();
+    const postDate = new Date().toLocaleDateString();
 
     const newPost = {
       author,
@@ -47,7 +62,6 @@ export default function PostContextProvider({ children }) {
       });
   }
 
-  //DELETE POST
   function deletePost(post) {
     console.log(post);
     //delete the post
@@ -73,7 +87,7 @@ export default function PostContextProvider({ children }) {
       });
     });
   }
-  //EDIT POST
+
   function editPost(post, content) {
     const updatedPost = {
       post: content,
@@ -87,7 +101,6 @@ export default function PostContextProvider({ children }) {
       });
   }
 
-  //GET ALL POSTS
   function getPosts() {
     dbPosts.orderBy("createdAt", "desc").onSnapshot((dbSnapshot) => {
       const dbItems = [];
@@ -99,13 +112,13 @@ export default function PostContextProvider({ children }) {
     });
   }
 
-  //GET POSTS FROM SPECIFIC USER
   function getUsersPosts(userID) {}
 
   const value = {
     posts,
     addPost,
     deletePost,
+    editPost,
     getPosts,
     getUsersPosts,
   };

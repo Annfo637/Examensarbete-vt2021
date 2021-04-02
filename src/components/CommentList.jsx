@@ -12,8 +12,9 @@ import {
   StyledLabel,
   StyledInput,
   StyledButton,
-  PostContent,
   PostButton,
+  ToggleButton,
+  PostInput,
 } from "../styles/CommonComponents";
 import CommentItem from "./CommentItem";
 
@@ -21,6 +22,7 @@ export default function CommentList({ post }) {
   const { currentUser, currentUserDB } = useContext(AuthContext);
   const { addComment } = useContext(CommentContext);
   const [commentList, setCommentList] = useState([]);
+  const [showComments, setShowComments] = useState(true);
 
   const postID = post.postID;
   const dbComments = db.collection("comments");
@@ -37,7 +39,7 @@ export default function CommentList({ post }) {
         dbSnapshot.forEach((doc) => {
           dbItems.push(doc.data());
         });
-        console.log("getComments ", dbItems);
+        //console.log("getComments ", dbItems);
         setCommentList(dbItems);
       });
   }
@@ -53,6 +55,25 @@ export default function CommentList({ post }) {
     commentRef.current.value = "";
   }
 
+  function toggleComments() {
+    setShowComments(!showComments);
+  }
+
+  function renderComments() {
+    return (
+      <>
+        {commentList &&
+          commentList
+            .filter((comment) => {
+              return postID === comment.postID;
+            })
+            .map((comment, index) => {
+              return <CommentItem key={index} comment={comment} />;
+            })}
+      </>
+    );
+  }
+
   useEffect(() => {
     getComments();
   }, []);
@@ -61,36 +82,16 @@ export default function CommentList({ post }) {
     <>
       <MakePostContainer>
         <ContainerItem>
-          <PostContent
-            ref={commentRef}
-            placeholder="lägg till en kommentar..."
-          />
+          <PostInput ref={commentRef} placeholder="Lägg till en kommentar..." />
         </ContainerItem>
         <ContainerItem>
           <PostButton onClick={handleAddComment}>+</PostButton>
         </ContainerItem>
       </MakePostContainer>
-      <PostContainer>
-        {commentList &&
-          commentList
-            .filter((comment) => {
-              return postID === comment.postID;
-            })
-            .map((comment, index) => {
-              return (
-                <>
-                  <CommentItem
-                    key={index}
-                    comment={comment}
-                    commentID={comment.commentID}
-                    author={comment.author}
-                    authorID={comment.authorID}
-                    content={comment.comment}
-                  />
-                </>
-              );
-            })}
-      </PostContainer>
+      <ToggleButton onClick={toggleComments}>
+        Visa/dölj kommentarer
+      </ToggleButton>
+      <PostContainer>{showComments && renderComments()}</PostContainer>
     </>
   );
 }
