@@ -36,7 +36,7 @@ export default function AdminTabs() {
     getPendingUsers();
     getApprovedUsers();
     getAdminUsers();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AdminPageContainer>

@@ -19,7 +19,7 @@ export default function PostContextProvider({ children }) {
 
   useEffect(() => {
     currentUser && checkTypeOfUser();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function checkTypeOfUser() {
     if (isAdmin) {
@@ -45,7 +45,8 @@ export default function PostContextProvider({ children }) {
 
   // CRUD functions for posts
   function addPost(author, authorID, post) {
-    const postDate = new Date().toLocaleDateString();
+    // const postDate = new Date().toLocaleDateString();
+    const postDate = new Date().toLocaleString();
 
     const newPost = {
       author,

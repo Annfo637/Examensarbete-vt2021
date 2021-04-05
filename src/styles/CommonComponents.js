@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-export const StyledForm = styled.div`
-  max-width: 400px;
-`;
 export const StyledLabel = styled.label`
   margin-bottom: 5px;
 `;
@@ -15,21 +12,30 @@ export const StyledInput = styled.input`
 `;
 
 export const PostInput = styled.textarea`
-  margin-bottom: 15px;
+  //margin-bottom: 15px;
   padding: 5px;
-  width: 35vw;
+  height: 5rem;
+  width: 30vw;
   border: solid 1px lightgray;
   border-radius: 5px;
+  resize: none;
 `;
 
 export const CommentInput = styled(PostInput)`
-  width: 100%;
+  height: 2.5rem;
 `;
 
 export const EditWrapper = styled.div`
   padding: 5px;
-  border: 1px solid #423c45;
+  border: 1px solid #e06849;
   border-radius: 5px;
+  width: 31vw;
+`;
+
+export const PostWrapper = styled.div`
+  padding: 0 2rem;
+  /* border: 1px solid #423c45;
+  border-radius: 5px; */
 `;
 
 // BUTTONS
@@ -42,7 +48,7 @@ export const StyledButton = styled.button`
   border-radius: 15px;
   font-family: "Source Sans Pro";
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 500;
   width: ${(props) => (props.formButton ? "100%" : "auto")};
 `;
 
@@ -85,7 +91,7 @@ export const MyCard = styled.div`
   min-width: 0;
   max-width: 800px;
   margin-bottom: 1em;
-  padding: 1em 15%;
+  padding: 1em 10%;
   background-color: #fff;
   border: 1px solid lightgrey;
   border-radius: 5px;

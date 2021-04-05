@@ -42,10 +42,8 @@ export default function PageLayout({ children }) {
   return (
     <>
       <Header />
-      <PageContainer>
-        <NavBar />
-        {children}
-      </PageContainer>
+      <NavBar />
+      <PageContainer>{children}</PageContainer>
     </>
   );
 }

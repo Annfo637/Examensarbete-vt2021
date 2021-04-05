@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
 import {
-  StyledLabel,
-  StyledInput,
   EditButton,
   ButtonIconWrapper,
   MyCard,
   PostInput,
   EditWrapper,
+  PostWrapper,
 } from "../styles/CommonComponents";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -44,8 +43,10 @@ export default function PostItem({ post }) {
             value={postToUpdate}
             onChange={(e) => setPostToUpdate(e.target.value)}
           />
-          <EditButton onClick={() => setShowEdit(false)}>Avbryt</EditButton>
-          <EditButton onClick={() => submitEdit()}>Spara</EditButton>
+          <div>
+            <EditButton onClick={() => setShowEdit(false)}>Avbryt</EditButton>
+            <EditButton onClick={() => submitEdit()}>Spara</EditButton>
+          </div>
         </EditWrapper>
       );
     } else {
@@ -62,12 +63,14 @@ export default function PostItem({ post }) {
   return (
     <CommentContextProvider>
       <MyCard>
-        <div>
-          <i>{post.createdAt}</i>
-          {allowUserEditPost()}
-        </div>
-        <h5>{post.author}</h5>
-        {renderEditablePost()}
+        <PostWrapper>
+          <div>
+            <i>{post.createdAt}</i>
+            {allowUserEditPost()}
+          </div>
+          <h5>{post.author}</h5>
+          {renderEditablePost()}
+        </PostWrapper>
         <CommentList post={post} />
       </MyCard>
     </CommentContextProvider>

@@ -8,20 +8,9 @@ import {
 } from "../styles/PageLayout";
 import { PostButton, PostInput } from "../styles/CommonComponents";
 import PostItem from "./PostItem";
-import styled from "styled-components";
 
-const PendingUserNotice = styled.span`
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  color: #7d5e5e;
-  margin-bottom: 2rem;
-`;
-
-export default function PostListView() {
-  const { currentUser, currentUserDB, isAdmin, pendingUsers } = useContext(
-    AuthContext
-  );
+export default function UserPostList() {
+  const { currentUser, currentUserDB } = useContext(AuthContext);
   const { posts, getPosts, addPost } = useContext(PostContext);
 
   const postRef = useRef();
@@ -35,23 +24,12 @@ export default function PostListView() {
     postRef.current.value = "";
   }
 
-  function renderPendingUsersNotification() {
-    if (isAdmin && pendingUsers.length > 0) {
-      return (
-        <PendingUserNotice>
-          Hej Admin! Du har ansökningar som väntar på godkännande.
-        </PendingUserNotice>
-      );
-    }
-  }
-
   useEffect(() => {
     getPosts();
-  }, [pendingUsers]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-      {renderPendingUsersNotification()}
       <MakePostContainer>
         <ContainerItem>
           <PostInput ref={postRef} placeholder="Skriv ditt inlägg här..." />
@@ -62,9 +40,13 @@ export default function PostListView() {
       </MakePostContainer>
       <PostContainer>
         {posts &&
-          posts.map((post, index) => {
-            return <PostItem key={index} post={post} />;
-          })}
+          posts
+            .filter((post) => {
+              return post.authorID === currentUser.uid;
+            })
+            .map((post, index) => {
+              return <PostItem key={index} post={post} />;
+            })}
       </PostContainer>
     </>
   );

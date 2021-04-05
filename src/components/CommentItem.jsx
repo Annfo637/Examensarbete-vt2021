@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import {
-  StyledLabel,
-  StyledInput,
   EditButton,
   ButtonIconWrapper,
   MyCard,
@@ -19,9 +17,18 @@ const CommentHeading = styled.div`
   justify-content: space-between;
 `;
 
+const CommentHeadingItem = styled.span`
+  margin-right: 5px;
+  font-weight: ${(props) => (props.author ? "bold" : "")};
+  font-style: ${(props) => (props.timestamp ? "italic" : "")};
+`;
+
 const CommentCard = styled(MyCard)`
   width: 80%;
   padding: 5px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid lightgrey;
 `;
 
 export default function CommentItem({ comment }) {
@@ -56,8 +63,10 @@ export default function CommentItem({ comment }) {
             value={commentToUpdate}
             onChange={(e) => setCommentToUpdate(e.target.value)}
           />
-          <EditButton onClick={() => setShowEdit(false)}>Avbryt</EditButton>
-          <EditButton onClick={() => submitEdit()}>Spara</EditButton>
+          <div>
+            <EditButton onClick={() => setShowEdit(false)}>Avbryt</EditButton>
+            <EditButton onClick={() => submitEdit()}>Spara</EditButton>
+          </div>
         </EditWrapper>
       );
     } else {
@@ -76,7 +85,10 @@ export default function CommentItem({ comment }) {
       <CommentCard>
         <CommentHeading>
           <span>
-            <b>{comment.author}</b>
+            <CommentHeadingItem author>{comment.author}</CommentHeadingItem>
+            <CommentHeadingItem timestamp>
+              {comment.createdAt}
+            </CommentHeadingItem>
           </span>
           {allowUserEditComment()}
         </CommentHeading>

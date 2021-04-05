@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import AdminPage from "./pages/AdminPage";
+import UserPage from "./pages/UserPage";
 import GlobalStyle from "./styles/globalStyles";
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
     <AuthContextProvider>
       <GlobalStyle />
       <Switch>
-        <Route path="/admin" component={AdminPage} />
-        <Route path="/forgot-password" component={ForgotPasswordPage} />
+        <PrivateRoute path="/user/:id" component={UserPage} />
+        <PrivateRoute path="/admin" component={AdminPage} />
+        <PrivateRoute path="/forgot-password" component={ForgotPasswordPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />
         <PrivateRoute path="/update-profile" component={UpdateProfilePage} />

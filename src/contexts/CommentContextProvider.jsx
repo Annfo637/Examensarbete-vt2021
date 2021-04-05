@@ -1,26 +1,22 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext } from "react";
 import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { AuthContext } from "./AuthContextProvider";
 
 export const CommentContext = createContext({});
 
 export default function CommentContextProvider({ children }) {
-  //const [comments, setComments] = useState(null);
-  //const { currentUser } = useContext(AuthContext);
-
   const dbComments = db.collection("comments");
 
   //ADD COMMENT
   function addComment(author, authorID, postID, comment) {
-    const postDate = new Date().toLocaleString();
+    const commentDate = new Date().toLocaleString();
 
     const newComment = {
       author,
       authorID,
       commentID: uuidv4(),
       comment,
-      createdAt: postDate,
+      createdAt: commentDate,
       postID,
     };
     dbComments

@@ -1,13 +1,15 @@
 import React, { useRef, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Card, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import { StyledButton } from "../styles/CommonComponents";
 import {
   StyledForm,
-  StyledLabel,
-  StyledInput,
-  StyledButton,
-} from "../styles/CommonComponents";
+  FormHeading,
+  FormItem,
+  FormLabel,
+  FormInput,
+} from "../styles/forms";
 
 export default function RegisterForm() {
   const nameRef = useRef();
@@ -42,6 +44,10 @@ export default function RegisterForm() {
         passwordRef.current.value
       );
       setLoading(false);
+      nameRef.current.value = "";
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+      passwordConfirmRef.current.value = "";
       //Alert med information visas.
       setConfirmation(
         "Tack för din registrering. Medlemskap godkänns inom 72 timmar, annars kontakta din admin."
@@ -53,45 +59,39 @@ export default function RegisterForm() {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Registrera dig här</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          {confirmation && <Alert variant="success">{confirmation}</Alert>}
-          <Form onSubmit={handleRegister}>
-            <Form.Group controlId="name">
-              <Form.Label>För- och efternamn</Form.Label>
-              <Form.Control type="text" ref={nameRef} required></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="email">
-              <Form.Label>E-post</Form.Label>
-              <Form.Control type="email" ref={emailRef} required></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Label>Lösenord</Form.Label>
-              <Form.Control
-                type="password"
-                ref={passwordRef}
-                required
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="password-confirm">
-              <Form.Label>Bekräfta Lösenord</Form.Label>
-              <Form.Control
-                type="password"
-                ref={passwordConfirmRef}
-                required
-              ></Form.Control>
-            </Form.Group>
-            <StyledButton formButton disabled={loading} type="submit">
-              Skapa konto
-            </StyledButton>
-          </Form>
-          <div className="w-100 text-center mt-2">
-            Har du redan ett konto? <Link to="/login">Logga in</Link>
-          </div>
-        </Card.Body>
-      </Card>
+      <StyledForm onSubmit={handleRegister}>
+        <FormHeading className="text-center mb-4">
+          Registrera dig här
+        </FormHeading>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {confirmation && <Alert variant="success">{confirmation}</Alert>}
+        <FormItem controlId="name">
+          <FormLabel>För- och efternamn</FormLabel>
+          <FormInput type="text" ref={nameRef} required></FormInput>
+        </FormItem>
+        <FormItem controlId="email">
+          <FormLabel>E-post</FormLabel>
+          <FormInput type="email" ref={emailRef} required></FormInput>
+        </FormItem>
+        <FormItem controlId="password">
+          <FormLabel>Lösenord</FormLabel>
+          <FormInput type="password" ref={passwordRef} required></FormInput>
+        </FormItem>
+        <FormItem controlId="password-confirm">
+          <FormLabel>Bekräfta Lösenord</FormLabel>
+          <FormInput
+            type="password"
+            ref={passwordConfirmRef}
+            required
+          ></FormInput>
+        </FormItem>
+        <StyledButton formButton disabled={loading} type="submit">
+          Skapa konto
+        </StyledButton>
+      </StyledForm>
+      <div className="w-100 text-center mt-2">
+        Har du redan ett konto? <Link to="/login">Logga in</Link>
+      </div>
     </>
   );
 }

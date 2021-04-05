@@ -1,11 +1,19 @@
 import React, { useContext } from "react";
-import { Table } from "react-bootstrap";
+
 import { AuthContext } from "../contexts/AuthContextProvider";
 import {
   StyledButton,
   DeleteButton,
   ButtonIconWrapper,
 } from "../styles/CommonComponents";
+import {
+  MyTable,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableHeaderItem,
+  TableRow,
+} from "../styles/tables";
 
 export default function UserTable({ users, type }) {
   const { approveUser, makeAdminUser, removeAdminUser } = useContext(
@@ -58,27 +66,28 @@ export default function UserTable({ users, type }) {
   }
 
   return (
-    <Table striped bordered>
-      <thead>
-        <tr>
-          <th>Namn</th>
-          <th>E-post</th>
-          <th>Lösenord</th>
-        </tr>
-      </thead>
-      <tbody>
+    <MyTable>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderItem>Namn</TableHeaderItem>
+          <TableHeaderItem>E-post</TableHeaderItem>
+          <TableHeaderItem>Lösenord</TableHeaderItem>
+          <TableHeaderItem>Redigera</TableHeaderItem>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {users &&
           users.map((user, index) => {
             return (
-              <tr key={index}>
-                <td>{user.fullName}</td>
-                <td>{user.email}</td>
-                <td>{user.password}</td>
-                <td>{renderUserButtons(user)}</td>
-              </tr>
+              <TableRow key={index}>
+                <TableCell>{user.fullName}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.password}</TableCell>
+                <TableCell>{renderUserButtons(user)}</TableCell>
+              </TableRow>
             );
           })}
-      </tbody>
-    </Table>
+      </TableBody>
+    </MyTable>
   );
 }

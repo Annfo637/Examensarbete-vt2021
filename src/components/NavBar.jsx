@@ -11,6 +11,8 @@ const NavContainer = styled.div`
   justify-content: space-between;
   max-height: 100px;
   align-items: center;
+  border-bottom: solid 1px lightgray;
+  position: sticky;
 `;
 const NavList = styled.ul`
   display: flex;

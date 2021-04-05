@@ -6,8 +6,13 @@ const FormContainer = styled.div`
   margin-top: -100px;
   display: flex;
   justify-content: center;
-  padding-top: 1rem;
+  //padding-top: 1rem;
   min-height: 100vh;
+`;
+
+const FormWrapper = styled.div`
+  width: 100%;
+  max-width: 400px;
 `;
 
 export default function FormLayout({ children }) {
@@ -15,7 +20,7 @@ export default function FormLayout({ children }) {
     <>
       <Header />
       <FormContainer>
-        <div style={{ width: "100%", maxWidth: "400px" }}>{children}</div>
+        <FormWrapper>{children}</FormWrapper>
       </FormContainer>
     </>
   );

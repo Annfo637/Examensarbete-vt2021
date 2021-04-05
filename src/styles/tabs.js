@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Tabs = styled.div`
   overflow: hidden;
   height: 3em;
-  width: 100%;
+  width: 90%;
 `;
 
 export const Tab = styled.button`
@@ -15,7 +15,7 @@ export const Tab = styled.button`
   position: relative;
 
   margin-right: 0.1em;
-  font-weight: bold;
+  font-weight: 600;
   color: white;
   border: ${(props) => (props.active ? "1px solid #ccc" : "")};
   border-bottom: ${(props) => (props.active ? "none" : "")};
@@ -30,5 +30,5 @@ export const Tab = styled.button`
 
 export const Content = styled.div`
   display: ${(props) => (props.active ? "" : "none")};
-  width: 100%;
+  width: 90%;
 `;

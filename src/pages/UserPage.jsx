@@ -1,11 +1,14 @@
 import React from "react";
+import UserPostList from "../components/UserPostList";
+import PostContextProvider from "../contexts/PostContextProvider";
+import PageLayout from "../styles/PageLayout";
 
 export default function UserPage() {
   return (
-    <div>
-      {/* <Link to="update-profile" className="btn btn-primary w-100 mt-2">
-          Uppdatera profil
-        </Link> */}
-    </div>
+    <PostContextProvider>
+      <PageLayout>
+        <UserPostList />
+      </PageLayout>
+    </PostContextProvider>
   );
 }

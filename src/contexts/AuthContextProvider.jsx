@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 export default function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserDB, setCurrentUserDB] = useState(null);
-  const [pendingUsers, setPendingUsers] = useState(null);
+  const [pendingUsers, setPendingUsers] = useState([]);
   const [approvedUsers, setApprovedUsers] = useState(null);
   const [adminUsers, setAdminUsers] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
@@ -160,19 +160,13 @@ export default function AuthContextProvider({ children }) {
     });
   }
 
-  //useEffects
-  useEffect(() => {
-    console.log("useEffect", isAdmin);
-  }, [isAdmin]);
-
   useEffect(() => {
     const authObserver = auth.onAuthStateChanged((user) => {
-      console.log(user);
       setCurrentUser(user);
     });
     getAdminUsers();
     return authObserver;
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const value = {
     currentUser,

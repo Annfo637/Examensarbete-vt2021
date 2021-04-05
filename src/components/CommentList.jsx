@@ -9,12 +9,9 @@ import {
   PostContainer,
 } from "../styles/PageLayout";
 import {
-  StyledLabel,
-  StyledInput,
-  StyledButton,
   PostButton,
   ToggleButton,
-  PostInput,
+  CommentInput,
 } from "../styles/CommonComponents";
 import CommentItem from "./CommentItem";
 
@@ -76,16 +73,19 @@ export default function CommentList({ post }) {
 
   useEffect(() => {
     getComments();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       <MakePostContainer>
         <ContainerItem>
-          <PostInput ref={commentRef} placeholder="Lägg till en kommentar..." />
+          <CommentInput
+            ref={commentRef}
+            placeholder="Lägg till en kommentar..."
+          />
         </ContainerItem>
         <ContainerItem>
-          <PostButton onClick={handleAddComment}>+</PostButton>
+          <PostButton onClick={handleAddComment}>Lägg till</PostButton>
         </ContainerItem>
       </MakePostContainer>
       <ToggleButton onClick={toggleComments}>
