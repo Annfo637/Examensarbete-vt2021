@@ -4,7 +4,6 @@ export const StyledLabel = styled.label`
   margin-bottom: 5px;
 `;
 export const StyledInput = styled.input`
-  //display: inline-block;
   margin-bottom: 15px;
   padding: 5px 20px;
   border: solid 1px lightgray;
@@ -12,12 +11,12 @@ export const StyledInput = styled.input`
 `;
 
 export const PostInput = styled.textarea`
-  //margin-bottom: 15px;
   padding: 5px;
   height: 5rem;
   width: 30vw;
-  border: solid 1px lightgray;
-  border-radius: 5px;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 4px 4px 10px 3px lightgrey;
   resize: none;
 `;
 
@@ -32,20 +31,16 @@ export const EditWrapper = styled.div`
   width: 31vw;
 `;
 
-export const PostWrapper = styled.div`
-  padding: 0 2rem;
-  /* border: 1px solid #423c45;
-  border-radius: 5px; */
-`;
+export const PostWrapper = styled.div``;
 
 // BUTTONS
 export const StyledButton = styled.button`
-  //display: inline;
   color: white;
   background-color: #423c45;
   padding: 5px 20px;
   border: transparent;
-  border-radius: 15px;
+  border-radius: 7px;
+  box-shadow: 3px 3px 10px 1px grey;
   font-family: "Source Sans Pro";
   font-size: 1rem;
   font-weight: 500;
@@ -58,7 +53,8 @@ export const DeleteButton = styled(StyledButton)`
 
 export const PostButton = styled(StyledButton)`
   background-color: #8d93a1;
-  padding: 5px 10px;
+  padding: 5px 8px;
+  width: 100px;
 `;
 
 export const EditButton = styled(StyledButton)`
@@ -71,6 +67,7 @@ export const EditButton = styled(StyledButton)`
 
 export const ToggleButton = styled(StyledButton)`
   background-color: transparent;
+  box-shadow: none;
   color: #8d93a1;
   padding: 5px 10px;
 `;
@@ -87,12 +84,13 @@ export const MyCard = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 50%;
   min-width: 0;
   max-width: 800px;
   margin-bottom: 1em;
-  padding: 1em 10%;
+  padding: 1em 5%;
   background-color: #fff;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 5px lightgrey;
 `;

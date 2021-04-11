@@ -18,7 +18,7 @@ function App() {
       <Switch>
         <PrivateRoute path="/user/:id" component={UserPage} />
         <PrivateRoute path="/admin" component={AdminPage} />
-        <PrivateRoute path="/forgot-password" component={ForgotPasswordPage} />
+        <Route path="/forgot-password" component={ForgotPasswordPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />
         <PrivateRoute path="/update-profile" component={UpdateProfilePage} />

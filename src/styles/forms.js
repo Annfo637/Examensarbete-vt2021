@@ -6,12 +6,12 @@ export const StyledForm = styled.form`
   flex-direction: column;
   width: 100%;
   min-width: 0;
-  //max-width: 800px;
   margin-bottom: 1em;
   padding: 1em 5%;
   background-color: #fff;
   border: 1px solid lightgrey;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 5px lightgrey;
 `;
 
 export const FormHeading = styled.h2`
@@ -37,6 +37,7 @@ export const FormInput = styled.input`
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 4px 4px 10px 3px lightgrey;
 `;

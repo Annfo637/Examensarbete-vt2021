@@ -24,11 +24,12 @@ const CommentHeadingItem = styled.span`
 `;
 
 const CommentCard = styled(MyCard)`
-  width: 80%;
+  width: 100%;
   padding: 5px;
   border: none;
+  box-shadow: none;
   border-radius: 0;
-  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
 `;
 
 export default function CommentItem({ comment }) {

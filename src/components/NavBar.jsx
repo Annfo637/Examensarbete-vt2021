@@ -26,7 +26,9 @@ const NavItem = styled.li`
 `;
 
 export default function NavBar() {
-  const { currentUser, logoutUser, isAdmin } = useContext(AuthContext);
+  const { currentUser, logoutUser, isAdmin, currentUserDB } = useContext(
+    AuthContext
+  );
   const history = useHistory();
   const [error, setError] = useState("");
 
@@ -41,6 +43,7 @@ export default function NavBar() {
   }
 
   function renderAdminMenu() {
+    console.log(currentUserDB);
     return (
       <NavList>
         <NavItem>
@@ -69,6 +72,7 @@ export default function NavBar() {
   }
 
   function renderUserMenu() {
+    console.log(currentUserDB);
     return (
       <NavList>
         <NavItem>
@@ -93,10 +97,12 @@ export default function NavBar() {
 
   return (
     <NavContainer>
-      {currentUser && (
+      {currentUser && currentUserDB && (
         <span>
-          <strong>Inloggad som:</strong>
-          {currentUser.email}
+          <strong>Inloggad som: </strong>
+          <span>
+            {currentUser.email}, {currentUserDB.fullName}
+          </span>
         </span>
       )}
       {isAdmin ? renderAdminMenu() : renderUserMenu()}

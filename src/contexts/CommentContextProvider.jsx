@@ -7,7 +7,7 @@ export const CommentContext = createContext({});
 export default function CommentContextProvider({ children }) {
   const dbComments = db.collection("comments");
 
-  //ADD COMMENT
+  // CRUD FUNCTIONS FOR COMMENTS
   function addComment(author, authorID, postID, comment) {
     const commentDate = new Date().toLocaleString();
 
@@ -27,11 +27,7 @@ export default function CommentContextProvider({ children }) {
       });
   }
 
-  //DELETE COMMENT
   function deleteComment(comment) {
-    console.log(comment);
-    //const dbPostComments = dbComments.where("postID", "==", comment.postID);
-
     dbComments
       .doc(comment.commentID)
       .delete()
@@ -40,13 +36,12 @@ export default function CommentContextProvider({ children }) {
       });
     console.log("delete");
   }
-  //EDIT COMMENT
+
   function editComment(comment, content) {
-    //const dbPostComments = dbComments.where("postID", "==", comment.postID);
     const updatedComment = {
       comment: content,
     };
-    //setLoading();
+
     dbComments
       .doc(comment.commentID)
       .update(updatedComment)
@@ -54,24 +49,6 @@ export default function CommentContextProvider({ children }) {
         console.error(err);
       });
   }
-
-  //GET ALL COMMENTS IN A POST
-  //   function getComments(postID) {
-  //     const dbPostComments = db
-  //       .collection("posts")
-  //       .doc(postID)
-  //       .collection("comments");
-  //     console.log(postID);
-
-  //     dbPostComments.orderBy("createdAt", "desc").onSnapshot((dbSnapshot) => {
-  //       const dbItems = [];
-  //       dbSnapshot.forEach((doc) => {
-  //         dbItems.push(doc.data());
-  //       });
-  //       console.log(dbItems);
-  //       setComments(dbItems);
-  //     });
-  //   }
 
   const value = {
     addComment,
