@@ -34,7 +34,6 @@ export default function CommentContextProvider({ children }) {
       .catch((err) => {
         console.error(err);
       });
-    console.log("delete");
   }
 
   function editComment(comment, content) {

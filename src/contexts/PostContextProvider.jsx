@@ -7,13 +7,12 @@ export const PostContext = createContext({});
 
 export default function PostContextProvider({ children }) {
   const [posts, setPosts] = useState(null);
-  const { currentUser, currentUserDB, setCurrentUserDB, isAdmin } = useContext(
-    AuthContext
-  );
+  const [usersPosts, setUsersPosts] = useState(null);
+  const { currentUser, currentUserDB, setCurrentUserDB, isAdmin } =
+    useContext(AuthContext);
 
   const dbPosts = db.collection("posts");
   const dbComments = db.collection("comments");
-  console.log(dbPosts);
   const dbUsers = db.collection("users");
   const dbAdmin = db.collection("adminUsers");
 
@@ -27,19 +26,15 @@ export default function PostContextProvider({ children }) {
         .doc(currentUser.uid)
         .get()
         .then((doc) => {
-          console.log("hej admin");
           setCurrentUserDB(doc.data());
         });
-      console.log(currentUserDB);
     } else {
       dbUsers
         .doc(currentUser.uid)
         .get()
         .then((doc) => {
-          console.log("hej");
           setCurrentUserDB(doc.data());
         });
-      console.log(currentUserDB);
     }
   }
 
@@ -64,19 +59,16 @@ export default function PostContextProvider({ children }) {
   }
 
   function deletePost(post) {
-    console.log(post);
-    //delete the post
+    //first delete the post
     dbPosts
       .doc(post.postID)
       .delete()
       .catch((err) => {
         console.error(err);
       });
-    console.log("delete");
-    //delete all comments on post
 
+    //then delete all comments on post
     dbComments.where("postID", "==", post.postID).onSnapshot((dbSnapshot) => {
-      console.log(dbSnapshot);
       dbSnapshot.forEach((doc) => {
         dbComments
           .doc(doc.data().commentID)
@@ -84,7 +76,6 @@ export default function PostContextProvider({ children }) {
           .catch((err) => {
             console.error(err);
           });
-        console.log("delete comments");
       });
     });
   }
@@ -108,15 +99,26 @@ export default function PostContextProvider({ children }) {
       dbSnapshot.forEach((doc) => {
         dbItems.push(doc.data());
       });
-      console.log(dbItems);
       setPosts(dbItems);
     });
   }
 
-  function getUsersPosts(userID) {}
+  function getUsersPosts() {
+    dbPosts
+      .where("authorID", "==", currentUser.uid)
+      .orderBy("createdAt", "desc")
+      .onSnapshot((dbSnapshot) => {
+        const dbItems = [];
+        dbSnapshot.forEach((doc) => {
+          dbItems.push(doc.data());
+        });
+        setUsersPosts(dbItems);
+      });
+  }
 
   const value = {
     posts,
+    usersPosts,
     addPost,
     deletePost,
     editPost,

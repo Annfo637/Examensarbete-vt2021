@@ -16,9 +16,8 @@ import {
 } from "../styles/tables";
 
 export default function UserTable({ users, type }) {
-  const { approveUser, makeAdminUser, removeAdminUser } = useContext(
-    AuthContext
-  );
+  const { approveUser, makeAdminUser, removeAdminUser, deleteUser } =
+    useContext(AuthContext);
 
   function renderUserButtons(user) {
     if (type === "pending") {
@@ -30,7 +29,9 @@ export default function UserTable({ users, type }) {
             </StyledButton>
           </ButtonIconWrapper>
           <ButtonIconWrapper>
-            <DeleteButton>Radera</DeleteButton>
+            <DeleteButton onClick={() => deleteUser(type, user)}>
+              Radera
+            </DeleteButton>
           </ButtonIconWrapper>
         </>
       );
@@ -44,7 +45,9 @@ export default function UserTable({ users, type }) {
             </StyledButton>
           </ButtonIconWrapper>
           <ButtonIconWrapper>
-            <DeleteButton>Radera</DeleteButton>
+            <DeleteButton onClick={() => deleteUser(type, user)}>
+              Radera
+            </DeleteButton>
           </ButtonIconWrapper>
         </>
       );
@@ -58,7 +61,9 @@ export default function UserTable({ users, type }) {
             </StyledButton>
           </ButtonIconWrapper>
           <ButtonIconWrapper>
-            <DeleteButton>Radera</DeleteButton>
+            <DeleteButton onClick={() => deleteUser(type, user)}>
+              Radera
+            </DeleteButton>
           </ButtonIconWrapper>
         </>
       );

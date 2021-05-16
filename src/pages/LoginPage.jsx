@@ -4,10 +4,8 @@ import FormLayout from "../styles/FormLayout";
 
 export default function LoginPage() {
   return (
-    <>
-      <FormLayout>
-        <LoginForm />
-      </FormLayout>
-    </>
+    <FormLayout>
+      <LoginForm />
+    </FormLayout>
   );
 }

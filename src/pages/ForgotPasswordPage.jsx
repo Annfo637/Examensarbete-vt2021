@@ -1,7 +1,16 @@
 import React, { useRef, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Card, Button, Alert, Container } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import {
+  StyledForm,
+  FormHeading,
+  FormItem,
+  FormLabel,
+  FormInput,
+} from "../styles/forms";
+import FormLayout from "../styles/FormLayout";
+import { StyledButton } from "../styles/CommonComponents";
 
 export default function ForgotPasswordPage() {
   const emailRef = useRef();
@@ -20,7 +29,7 @@ export default function ForgotPasswordPage() {
       setLoading(true);
       await resetPassword(emailRef.current.value);
       setMessage(
-        "Ett mejl har skickats till dig med instruktioner för lösenordsbyte"
+        "Ett mejl har skickats till dig med instruktioner för lösenordsbyte."
       );
     } catch {
       setError("Det gick inte att återställa lösenordet.");
@@ -29,40 +38,27 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Återställ ditt lösenord</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
-              {message && <Alert variant="success">{message}</Alert>}
-              <Form onSubmit={handleResetPassword}>
-                <Form.Group id="email">
-                  <Form.Label>E-post</Form.Label>
-                  <Form.Control
-                    type="email"
-                    ref={emailRef}
-                    required
-                  ></Form.Control>
-                </Form.Group>
-                <Button disabled={loading} className="w-100" type="submit">
-                  Återställ lösenord
-                </Button>
-              </Form>
-              <div className="w-100 text-center mt-2">
-                <Link to="/login">Logga in</Link>
-              </div>
-            </Card.Body>
-          </Card>
-          <div className="w-100 text-center mt-2">
-            Har du inget konto? <Link to="/register">Registrera ett här</Link>
-          </div>
-        </div>
-      </Container>
-    </>
+    <FormLayout>
+      <StyledForm onSubmit={handleResetPassword}>
+        <FormHeading>Återställ ditt lösenord</FormHeading>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {message && <Alert variant="success">{message}</Alert>}
+
+        <FormItem id="email">
+          <FormLabel>E-post</FormLabel>
+          <FormInput type="email" ref={emailRef} required></FormInput>
+        </FormItem>
+        <StyledButton disabled={loading} type="submit">
+          Återställ lösenord
+        </StyledButton>
+      </StyledForm>
+      <div className="w-100 text-center mt-2">
+        Tillbaka till <Link to="/login">inloggning</Link>
+      </div>
+
+      <div className="w-100 text-center mt-2">
+        Har du inget konto? <Link to="/register">Registrera ett här</Link>
+      </div>
+    </FormLayout>
   );
 }

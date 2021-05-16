@@ -46,7 +46,7 @@ export default function CommentList({ post }) {
     const commentAuthorID = currentUser.uid;
     const comment = commentRef.current.value;
 
-    console.log(commentAuthor, commentAuthorID, postID, comment);
+    //console.log(commentAuthor, commentAuthorID, postID, comment);
 
     addComment(commentAuthor, commentAuthorID, postID, comment);
     commentRef.current.value = "";
@@ -89,7 +89,7 @@ export default function CommentList({ post }) {
         </ContainerItem>
       </MakePostContainer>
       <ToggleButton onClick={toggleComments}>
-        Visa/dölj kommentarer
+        Visa/dölj kommentarer ({commentList.length})
       </ToggleButton>
       <PostContainer>{showComments && renderComments()}</PostContainer>
     </>

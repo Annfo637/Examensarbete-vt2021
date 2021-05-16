@@ -38,6 +38,7 @@ export default function AuthContextProvider({ children }) {
       });
     });
   }
+
   function makeAdminUser(user) {
     const userID = user.userID;
     const newAdmin = {
@@ -78,6 +79,34 @@ export default function AuthContextProvider({ children }) {
       });
 
     return dbUsers.doc(userID).set(removedAdmin);
+  }
+
+  function deleteUser(type, user) {
+    if (type === "pending") {
+      console.log("pending");
+      dbPending
+        .doc(user.tempID)
+        .delete()
+        .catch((err) => {
+          console.error(err);
+        });
+    } else if (type === "approved") {
+      console.log("approved");
+      dbUsers
+        .doc(user.userID)
+        .delete()
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.log("admin");
+      dbAdmin
+        .doc(user.userID)
+        .delete()
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }
 
   //REGISTER, LOGIN/OUT, UPDATE USER OR PASSWORD
@@ -123,12 +152,6 @@ export default function AuthContextProvider({ children }) {
     return currentUser.updatePassword(password);
   }
 
-  function updateName(name) {
-    console.log(name);
-    const updatedUser = auth.currentUser.updateProfile({ displayName: name });
-    return updatedUser;
-  }
-
   //FUNCTIONS FOR FETCHING USERS FROM FIRESTORE
   function getPendingUsers() {
     dbPending.onSnapshot((dbSnapshot) => {
@@ -165,6 +188,7 @@ export default function AuthContextProvider({ children }) {
       setCurrentUser(user);
     });
     getAdminUsers();
+    getPendingUsers();
     return authObserver;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -184,28 +208,12 @@ export default function AuthContextProvider({ children }) {
     approveUser,
     makeAdminUser,
     removeAdminUser,
+    deleteUser,
     loginUser,
     logoutUser,
     resetPassword,
-    updateName,
     updatePassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
-// async function loginUser(email, password) {
-//   return auth.signInWithEmailAndPassword(email, password).then((cred) => {
-//     console.log(cred);
-//     let adminID = [];
-//     adminUsers.forEach((user) => {
-//       console.log(user.userID);
-//       console.log(cred.user.uid);
-//       adminID.push(user.userID);
-//     });
-//     console.log("inloggad user är admin:", adminID.includes(cred.user.uid));
-//     setIsAdmin(adminID.includes(cred.user.uid));
-//     console.log(isAdmin);
-//     //return isAdmin;
-//   });
-// }

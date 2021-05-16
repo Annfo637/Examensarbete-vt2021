@@ -1,111 +1,122 @@
 import React, { useRef, useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Form, Card, Button, Alert, Container } from "react-bootstrap";
+import { db } from "../firebase";
+import { useHistory } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
+import {
+  StyledForm,
+  FormHeading,
+  FormItem,
+  FormLabel,
+  FormInput,
+} from "../styles/forms";
+import FormLayout from "../styles/FormLayout";
+import { StyledButton } from "../styles/CommonComponents";
+import CheckIcon from "@material-ui/icons/Check";
 
 export default function UpdateProfilePage() {
   const nameRef = useRef();
-  const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { currentUser, updateName, updatePassword } = useContext(AuthContext);
+  const { currentUserDB, updatePassword, isAdmin } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const history = useHistory();
+
+  const dbUsers = db.collection("users");
+  const dbAdmin = db.collection("adminUsers");
+  const id = currentUserDB.userID;
 
   function handleUpdateProfile(e) {
     e.preventDefault();
 
-    // Check that user has written matching passwords
+    let userName = currentUserDB.fullName;
+    let userPassword = currentUserDB.password;
+    setError("");
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Lösenorden matchar inte varandra.");
     }
-
-    const promises = [];
-    setLoading(true);
-    setError("");
-
-    if (nameRef.current.value !== currentUser.displayName) {
-      console.log("hej");
-      const changedName = updateName(nameRef.current.value);
-      console.log(changedName); //promise pending
-      promises.push(changedName);
+    if (nameRef.current.value !== currentUserDB.fullName) {
+      userName = nameRef.current.value;
     }
-    if (passwordRef.current.value !== currentUser.password) {
-      const changedPassword = updatePassword(passwordRef.current.value);
-      console.log(changedPassword);
-      promises.push(changedPassword);
+    if (
+      passwordRef.current.value !== currentUserDB.password &&
+      passwordRef.current.value.length > 0
+    ) {
+      userPassword = passwordRef.current.value;
+      updatePassword(passwordRef.current.value);
     }
 
-    Promise.all(promises)
-      .then(() => {
-        history.push("/");
-      })
-      .catch(() => {
-        setError("Det gick inte att uppdatera kontot.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    const updatedUser = {
+      fullName: userName,
+      password: userPassword,
+    };
+    if (isAdmin) {
+      dbAdmin
+        .doc(id)
+        .update(updatedUser)
+        .catch((err) => {
+          setError(err);
+        });
+    } else {
+      dbUsers
+        .doc(id)
+        .update(updatedUser)
+        .catch((err) => {
+          setError(err);
+        });
+    }
+    if (!error) {
+      setSuccess(true);
+    }
   }
 
   return (
-    <>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Uppdatera din profil</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={handleUpdateProfile}>
-                <Form.Group id="name">
-                  <Form.Label>För- och efternamn</Form.Label>
-                  <Form.Control
-                    type="text"
-                    ref={nameRef}
-                    required
-                    defaultValue={currentUser.displayName}
-                  ></Form.Control>
-                </Form.Group>
-                <Form.Group id="email">
-                  <Form.Label>E-post</Form.Label>
-                  <Form.Control
-                    type="email"
-                    ref={emailRef}
-                    disabled
-                    defaultValue={currentUser.email}
-                  ></Form.Control>
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Lösenord</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordRef}
-                    placeholder="Lämna tomt för att behålla samma lösenord"
-                  ></Form.Control>
-                </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Bekräfta Lösenord</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordConfirmRef}
-                    placeholder="Lämna tomt för att behålla samma lösenord"
-                  ></Form.Control>
-                </Form.Group>
-                <Button disabled={loading} className="w-100" type="submit">
-                  Spara
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-          <div className="w-100 text-center mt-2">
-            <Link to="/">Avbryt</Link>
-          </div>
-        </div>
-      </Container>
-    </>
+    <FormLayout>
+      <StyledForm onSubmit={handleUpdateProfile}>
+        <FormHeading>Uppdatera din profil</FormHeading>
+        {error && <Alert variant="danger">{error}</Alert>}
+
+        <FormItem id="name">
+          <FormLabel>För- och efternamn</FormLabel>
+          <FormInput
+            type="text"
+            ref={nameRef}
+            required
+            defaultValue={currentUserDB.fullName}
+          />
+        </FormItem>
+        <FormItem id="password">
+          <FormLabel>Lösenord</FormLabel>
+          <FormInput
+            type="password"
+            ref={passwordRef}
+            placeholder="Lämna tomt för att behålla samma lösenord"
+          />
+        </FormItem>
+        <FormItem id="password-confirm">
+          <FormLabel>Bekräfta Lösenord</FormLabel>
+          <FormInput
+            type="password"
+            ref={passwordConfirmRef}
+            placeholder="Lämna tomt för att behålla samma lösenord"
+          />
+        </FormItem>
+        <StyledButton type="submit">Spara</StyledButton>
+      </StyledForm>
+
+      <div className="w-100 text-center mt-2">
+        {success && (
+          <Alert variant="success">
+            Dina uppgifter har sparats!
+            <CheckIcon style={{ color: "#49b588" }} />
+          </Alert>
+        )}
+        <StyledButton onClick={() => history.push("/")}>
+          Tillbaka till hemsidan
+        </StyledButton>
+      </div>
+    </FormLayout>
   );
 }

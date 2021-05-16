@@ -11,7 +11,7 @@ import PostItem from "./PostItem";
 
 export default function UserPostList() {
   const { currentUser, currentUserDB } = useContext(AuthContext);
-  const { posts, getPosts, addPost } = useContext(PostContext);
+  const { usersPosts, getUsersPosts, addPost } = useContext(PostContext);
 
   const postRef = useRef();
 
@@ -25,7 +25,7 @@ export default function UserPostList() {
   }
 
   useEffect(() => {
-    getPosts();
+    getUsersPosts();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -39,11 +39,11 @@ export default function UserPostList() {
         </ContainerItem>
       </MakePostContainer>
       <PostContainer>
-        {posts &&
-          posts
-            .filter((post) => {
-              return post.authorID === currentUser.uid;
-            })
+        {usersPosts &&
+          usersPosts
+            // .filter((post) => {
+            //   return post.authorID === currentUser.uid;
+            // })
             .map((post, index) => {
               return <PostItem key={index} post={post} />;
             })}
