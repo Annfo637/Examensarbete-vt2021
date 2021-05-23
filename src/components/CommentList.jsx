@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { db } from "../firebase";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import { CommentContext } from "../contexts/CommentContextProvider";
 import {
   ContainerItem,
@@ -12,7 +12,7 @@ import { CommentInput } from "../styles/textareas";
 import CommentItem from "./CommentItem";
 
 export default function CommentList({ post }) {
-  const { currentUser, currentUserDB } = useContext(AuthContext);
+  const { currentUser, currentUserDB } = useContext(UserContext);
   const { addComment } = useContext(CommentContext);
   const [commentList, setCommentList] = useState([]);
   const [showComments, setShowComments] = useState(true);

@@ -2,7 +2,7 @@ import React, { useRef, useContext, useState } from "react";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import {
   StyledForm,
   FormHeading,
@@ -17,7 +17,7 @@ export default function UpdateProfilePage() {
   const nameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { currentUserDB, updatePassword, isAdmin } = useContext(AuthContext);
+  const { currentUserDB, updatePassword, isAdmin } = useContext(UserContext);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const history = useHistory();

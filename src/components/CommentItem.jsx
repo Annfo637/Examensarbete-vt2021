@@ -7,7 +7,7 @@ import { CommentInput } from "../styles/textareas";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { CommentContext } from "../contexts/CommentContextProvider";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 
 const CommentHeading = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const CommentCard = styled(MyCard)`
 
 export default function CommentItem({ comment }) {
   const { editComment, deleteComment } = useContext(CommentContext);
-  const { currentUser, isAdmin } = useContext(AuthContext);
+  const { currentUser, isAdmin } = useContext(UserContext);
   const [showEdit, setShowEdit] = useState(false);
   const [commentToUpdate, setCommentToUpdate] = useState(comment.comment);
 

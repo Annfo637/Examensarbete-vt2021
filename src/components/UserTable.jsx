@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import { ButtonIconWrapper } from "../styles/wrappers";
 import { StyledButton, DeleteButton } from "../styles/buttons";
 import {
@@ -14,7 +14,7 @@ import {
 
 export default function UserTable({ users, type }) {
   const { approveUser, makeAdminUser, removeAdminUser, deleteUser } =
-    useContext(AuthContext);
+    useContext(UserContext);
 
   function renderUserButtons(user) {
     if (type === "pending") {

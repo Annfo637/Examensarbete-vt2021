@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import { StyledButton } from "../styles/buttons";
 import {
   StyledForm,
@@ -16,7 +16,7 @@ export default function RegisterForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser } = useContext(UserContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState("");

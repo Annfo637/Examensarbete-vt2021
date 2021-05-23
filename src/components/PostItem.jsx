@@ -10,7 +10,7 @@ import { PostInput } from "../styles/textareas";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { PostContext } from "../contexts/PostContextProvider";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import CommentList from "./CommentList";
 import CommentContextProvider from "../contexts/CommentContextProvider";
 import styled from "styled-components";
@@ -30,7 +30,7 @@ const PostHeadingItem = styled.span`
 
 export default function PostItem({ post }) {
   const { editPost, deletePost } = useContext(PostContext);
-  const { currentUser, isAdmin } = useContext(AuthContext);
+  const { currentUser, isAdmin } = useContext(UserContext);
   const [showEdit, setShowEdit] = useState(false);
   const [postToUpdate, setPostToUpdate] = useState(post.post);
 

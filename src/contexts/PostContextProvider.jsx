@@ -1,14 +1,14 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { AuthContext } from "./AuthContextProvider";
+import { UserContext } from "./UserContextProvider";
 
 export const PostContext = createContext({});
 
 export default function PostContextProvider({ children }) {
   const [posts, setPosts] = useState(null);
   const [usersPosts, setUsersPosts] = useState(null);
-  const { currentUser, setCurrentUserDB, isAdmin } = useContext(AuthContext);
+  const { currentUser, setCurrentUserDB, isAdmin } = useContext(UserContext);
 
   const dbPosts = db.collection("posts");
   const dbComments = db.collection("comments");

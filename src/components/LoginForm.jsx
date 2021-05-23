@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import { StyledButton } from "../styles/buttons";
 import {
   StyledForm,
@@ -14,7 +14,7 @@ import {
 export default function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser } = useContext(UserContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();

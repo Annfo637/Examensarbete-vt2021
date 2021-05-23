@@ -2,9 +2,9 @@ import React, { createContext, useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 
-export const AuthContext = createContext({});
+export const UserContext = createContext({});
 
-export default function AuthContextProvider({ children }) {
+export default function UserContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserDB, setCurrentUserDB] = useState(null);
   const [pendingUsers, setPendingUsers] = useState([]);
@@ -213,5 +213,5 @@ export default function AuthContextProvider({ children }) {
     updatePassword,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

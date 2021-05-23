@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
-import AuthContextProvider from "./contexts/AuthContextProvider";
+import UserContextProvider from "./contexts/UserContextProvider";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -13,7 +13,7 @@ import GlobalStyle from "./styles/globalStyles";
 
 function App() {
   return (
-    <AuthContextProvider>
+    <UserContextProvider>
       <GlobalStyle />
       <Switch>
         <PrivateRoute path="/user/:id" component={UserPage} />
@@ -24,7 +24,7 @@ function App() {
         <PrivateRoute path="/update-profile" component={UpdateProfilePage} />
         <PrivateRoute exact path="/" component={HomePage} />
       </Switch>
-    </AuthContextProvider>
+    </UserContextProvider>
   );
 }
 

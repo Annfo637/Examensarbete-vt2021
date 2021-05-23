@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { colors } from "../styles/colors";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { MyTooltip, TooltipText } from "../styles/tooltips";
 
@@ -88,7 +88,7 @@ const SettingsLink = styled(Link)`
 
 export default function NavBar() {
   const { currentUser, logoutUser, isAdmin, currentUserDB } =
-    useContext(AuthContext);
+    useContext(UserContext);
   const history = useHistory();
   const [error, setError] = useState("");
 

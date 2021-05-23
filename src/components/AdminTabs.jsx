@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import styled from "styled-components";
 import { Tabs, Tab, Content } from "../styles/tabs";
 import UserTable from "./UserTable";
@@ -23,7 +23,7 @@ export default function AdminTabs() {
     getApprovedUsers,
     adminUsers,
     getAdminUsers,
-  } = useContext(AuthContext);
+  } = useContext(UserContext);
 
   const handleClick = (e) => {
     const index = parseInt(e.target.id, 0);

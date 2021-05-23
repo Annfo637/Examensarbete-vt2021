@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import { PostContext } from "../contexts/PostContextProvider";
 import {
   ContainerItem,
@@ -21,7 +21,7 @@ const PendingUserNotice = styled.span`
 
 export default function PostListView() {
   const { currentUser, currentUserDB, isAdmin, pendingUsers } =
-    useContext(AuthContext);
+    useContext(UserContext);
   const { posts, getPosts, addPost } = useContext(PostContext);
 
   const postRef = useRef();

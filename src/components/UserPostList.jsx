@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { AuthContext } from "../contexts/AuthContextProvider";
+import { UserContext } from "../contexts/UserContextProvider";
 import { PostContext } from "../contexts/PostContextProvider";
 import {
   ContainerItem,
@@ -11,7 +11,7 @@ import { PostInput } from "../styles/textareas";
 import PostItem from "./PostItem";
 
 export default function UserPostList() {
-  const { currentUser, currentUserDB } = useContext(AuthContext);
+  const { currentUser, currentUserDB } = useContext(UserContext);
   const { usersPosts, getUsersPosts, addPost } = useContext(PostContext);
 
   const postRef = useRef();
