@@ -7,7 +7,7 @@ export const CommentContext = createContext({});
 export default function CommentContextProvider({ children }) {
   const dbComments = db.collection("comments");
 
-  // CRUD FUNCTIONS FOR COMMENTS
+  //CRUD FUNCTIONS FOR COMMENTS
   function addComment(author, authorID, postID, comment) {
     const commentDate = new Date().toLocaleString();
 

@@ -47,6 +47,7 @@ export default function UpdateProfilePage() {
       updatePassword(passwordRef.current.value);
     }
 
+    //Send updated user data to database
     const updatedUser = {
       fullName: userName,
       password: userPassword,

@@ -33,10 +33,6 @@ export default function Header() {
   return (
     <HeaderContainer>
       <HeaderImage src="../../images/colorhouses.jpg" alt="apartment houses" />
-      {/* <HeaderImage
-        src="../../images/squarewithsky.jpg"
-        alt="apartment houses"
-      /> */}
       <HeaderTitle>Grannar tillsammans</HeaderTitle>
     </HeaderContainer>
   );

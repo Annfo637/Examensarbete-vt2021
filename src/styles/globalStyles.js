@@ -1,5 +1,3 @@
-/* fonts, colors etc used globally in the app */
-
 import { createGlobalStyle } from "styled-components";
 import "../styles/fonts/fontImports.css";
 import { colors } from "./colors";

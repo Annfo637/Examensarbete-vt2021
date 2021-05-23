@@ -23,10 +23,11 @@ export const TooltipText = styled.span`
   opacity: 0;
   transition: opacity 1s;
 
+  /* Use a pseudo element to create an arrow at the bottom of the tooltip */
   &::after {
     content: " ";
     position: absolute;
-    top: 100%; /* At the bottom of the tooltip */
+    top: 100%;
     left: 50%;
     margin-left: -8px;
     border-width: 8px;

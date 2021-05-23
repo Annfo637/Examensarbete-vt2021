@@ -41,13 +41,9 @@ export default function UserPostList() {
       </MakePostContainer>
       <PostContainer>
         {usersPosts &&
-          usersPosts
-            // .filter((post) => {
-            //   return post.authorID === currentUser.uid;
-            // })
-            .map((post, index) => {
-              return <PostItem key={index} post={post} />;
-            })}
+          usersPosts.map((post, index) => {
+            return <PostItem key={index} post={post} />;
+          })}
       </PostContainer>
     </>
   );

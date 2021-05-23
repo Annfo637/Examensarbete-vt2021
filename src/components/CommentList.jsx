@@ -32,7 +32,6 @@ export default function CommentList({ post }) {
         dbSnapshot.forEach((doc) => {
           dbItems.push(doc.data());
         });
-        //console.log("getComments ", dbItems);
         setCommentList(dbItems);
       });
   }
@@ -41,8 +40,6 @@ export default function CommentList({ post }) {
     const commentAuthor = currentUserDB.fullName;
     const commentAuthorID = currentUser.uid;
     const comment = commentRef.current.value;
-
-    //console.log(commentAuthor, commentAuthorID, postID, comment);
 
     addComment(commentAuthor, commentAuthorID, postID, comment);
     commentRef.current.value = "";

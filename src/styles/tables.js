@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { colors } from "./colors";
 
 export const MyTable = styled.table`
-  border: 1px solid #dee2e6; //kollas
+  border: 1px solid #dee2e6;
   border-spacing: 0;
   width: 100%;
-  color: #212529; //kollas
+  color: #212529;
   border-collapse: collapse;
 `;
 

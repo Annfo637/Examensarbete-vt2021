@@ -4,10 +4,8 @@ import PageLayout from "../styles/layouts/PageLayout";
 
 export default function AdminPage() {
   return (
-    <>
-      <PageLayout>
-        <AdminTabs />
-      </PageLayout>
-    </>
+    <PageLayout>
+      <AdminTabs />
+    </PageLayout>
   );
 }

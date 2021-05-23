@@ -6,7 +6,6 @@ const FormContainer = styled.div`
   margin-top: -100px;
   display: flex;
   justify-content: center;
-  //padding-top: 1rem;
   min-height: 100vh;
 `;
 

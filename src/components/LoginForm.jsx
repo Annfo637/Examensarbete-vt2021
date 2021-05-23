@@ -55,10 +55,6 @@ export default function LoginForm() {
           Logga in
         </StyledButton>
       </StyledForm>
-      {/* <div className="w-100 text-center mt-2">
-        Glömt lösenordet? <Link to="/forgot-password">Klicka här</Link>
-      </div> */}
-
       <div className="w-100 text-center mt-2">
         Har du inget konto? <Link to="/register">Registrera ett här</Link>
       </div>

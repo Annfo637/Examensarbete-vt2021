@@ -39,7 +39,6 @@ export default function PostContextProvider({ children }) {
 
   // CRUD functions for posts
   function addPost(author, authorID, post) {
-    // const postDate = new Date().toLocaleDateString();
     const postDate = new Date().toLocaleString();
 
     const newPost = {
@@ -83,7 +82,6 @@ export default function PostContextProvider({ children }) {
     const updatedPost = {
       post: content,
     };
-    //setLoading();
     dbPosts
       .doc(post.postID)
       .update(updatedPost)

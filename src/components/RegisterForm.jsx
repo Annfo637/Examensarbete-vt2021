@@ -60,9 +60,7 @@ export default function RegisterForm() {
   return (
     <>
       <StyledForm onSubmit={handleRegister}>
-        <FormHeading className="text-center mb-4">
-          Registrera dig här
-        </FormHeading>
+        <FormHeading>Registrera dig här</FormHeading>
         {error && <Alert variant="danger">{error}</Alert>}
         {confirmation && <Alert variant="success">{confirmation}</Alert>}
         <FormItem controlId="name">

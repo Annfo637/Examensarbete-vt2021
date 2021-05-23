@@ -108,7 +108,7 @@ export default function AuthContextProvider({ children }) {
     }
   }
 
-  //REGISTER, LOGIN/OUT, UPDATE USER OR PASSWORD
+  //REGISTER, LOGIN/OUT, UPDATE PASSWORD
   function registerUser(name, email, password) {
     const newUser = {
       fullName: name,
