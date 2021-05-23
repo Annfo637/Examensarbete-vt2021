@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 
 import { AuthContext } from "../contexts/AuthContextProvider";
-import {
-  StyledButton,
-  DeleteButton,
-  ButtonIconWrapper,
-} from "../styles/CommonComponents";
+import { ButtonIconWrapper } from "../styles/wrappers";
+import { StyledButton, DeleteButton } from "../styles/buttons";
 import {
   MyTable,
   TableBody,

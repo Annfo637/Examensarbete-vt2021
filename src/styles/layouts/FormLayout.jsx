@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 const FormContainer = styled.div`
   margin-top: -100px;

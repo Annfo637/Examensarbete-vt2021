@@ -8,8 +8,7 @@ export const PostContext = createContext({});
 export default function PostContextProvider({ children }) {
   const [posts, setPosts] = useState(null);
   const [usersPosts, setUsersPosts] = useState(null);
-  const { currentUser, currentUserDB, setCurrentUserDB, isAdmin } =
-    useContext(AuthContext);
+  const { currentUser, setCurrentUserDB, isAdmin } = useContext(AuthContext);
 
   const dbPosts = db.collection("posts");
   const dbComments = db.collection("comments");

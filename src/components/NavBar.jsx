@@ -2,25 +2,31 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import { StyledButton } from "../styles/CommonComponents";
+import { colors } from "../styles/colors";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import SettingsIcon from "@material-ui/icons/Settings";
-import Tooltip from "@material-ui/core/Tooltip";
 import { MyTooltip, TooltipText } from "../styles/tooltips";
 
 const NavContainer = styled.div`
   display: flex;
-  margin: 1.5em;
-  justify-content: space-between;
+  flex-direction: column;
+  margin: 0.5em;
+  justify-content: center;
   max-height: 100px;
   align-items: center;
   border-bottom: solid 1px lightgray;
   position: sticky;
+  @media (min-width: 900px) {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1.5rem;
+  }
 `;
 const NavList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0;
 `;
 const NavItem = styled.li`
   display: inline-block;
@@ -32,8 +38,8 @@ const UserInfo = styled.span`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  color: white;
-  padding: 7px 20px;
+  color: ${colors.textLight};
+  padding: 7px 10px;
   border: transparent;
   border-radius: 7px;
   box-shadow: 3px 3px 10px 1px grey;
@@ -41,29 +47,43 @@ const StyledNavLink = styled(NavLink)`
   font-size: 1rem;
   font-weight: 500;
   width: auto;
-  background-color: #423c45;
+  background-color: ${colors.themeDark};
   &.${(props) => props.activeClassName} {
-    background-color: #8d93a1;
+    background-color: ${colors.themeLight};
   }
   &:hover {
-    color: white;
+    color: ${colors.textLight};
     text-decoration: none;
-    background-color: #8d93a1;
+    background-color: ${colors.themeLight};
+  }
+`;
+
+const StyledNavButton = styled.button`
+  color: ${colors.textLight};
+  padding: 7px 10px;
+  border: transparent;
+  border-radius: 7px;
+  box-shadow: 3px 3px 10px 1px grey;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
+  font-weight: 500;
+  width: auto;
+  background-color: ${colors.themeDark};
+  &.${(props) => props.activeClassName} {
+    background-color: ${colors.themeLight};
+  }
+  &:hover {
+    color: ${colors.textLight};
+    text-decoration: none;
+    background-color: ${colors.themeLight};
   }
 `;
 
 const SettingsLink = styled(Link)`
-  color: #2a2e30;
+  color: ${colors.textDark};
   &:hover {
-    color: #8d93a1;
+    color: ${colors.themeLight};
   }
-`;
-
-const TooltipMessage = styled.p`
-  font-size: 1rem;
-  font-family: "Source Sans Pro";
-  padding: 0.5rem;
-  margin: 0;
 `;
 
 export default function NavBar() {
@@ -108,7 +128,7 @@ export default function NavBar() {
           </NavItem>
         )}
         <NavItem>
-          <StyledButton onClick={handleLogout}>Logga ut</StyledButton>
+          <StyledNavButton onClick={handleLogout}>Logga ut</StyledNavButton>
         </NavItem>
         {error && <Alert variant="danger">{error}</Alert>}
       </NavList>
@@ -123,15 +143,6 @@ export default function NavBar() {
             <strong>Inloggad som: </strong>
             {currentUser.email}, {currentUserDB.fullName}
           </UserInfo>
-          {/* <Tooltip
-            title={<TooltipMessage>Mina kontoinställningar</TooltipMessage>}
-            arrow
-            placement="right"
-          >
-            <SettingsLink to="/update-profile">
-              <SettingsIcon />
-            </SettingsLink>
-          </Tooltip> */}
           <MyTooltip>
             <SettingsLink to="/update-profile">
               <SettingsIcon />

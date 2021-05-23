@@ -1,13 +1,13 @@
 import React from "react";
-import PostListView from "../components/PostListView";
+import PostList from "../components/PostList";
 import PostContextProvider from "../contexts/PostContextProvider";
-import PageLayout from "../styles/PageLayout";
+import PageLayout from "../styles/layouts/PageLayout";
 
 export default function HomePage() {
   return (
     <PostContextProvider>
       <PageLayout>
-        <PostListView />
+        <PostList />
       </PageLayout>
     </PostContextProvider>
   );

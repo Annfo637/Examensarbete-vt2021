@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "./colors";
 
 export const MyTooltip = styled.div`
   position: relative;
@@ -8,8 +9,8 @@ export const MyTooltip = styled.div`
 export const TooltipText = styled.span`
   visibility: hidden;
   width: 175px;
-  background-color: #8d93a1;
-  color: #fff;
+  background-color: ${colors.themeLight};
+  color: ${colors.textLight};
   text-align: center;
   border-radius: 5px;
   padding: 0.5rem;
@@ -19,6 +20,8 @@ export const TooltipText = styled.span`
   bottom: 150%;
   left: 50%;
   margin-left: -87px;
+  opacity: 0;
+  transition: opacity 1s;
 
   &::after {
     content: " ";
@@ -28,10 +31,11 @@ export const TooltipText = styled.span`
     margin-left: -8px;
     border-width: 8px;
     border-style: solid;
-    border-color: #8d93a1 transparent transparent transparent;
+    border-color: ${colors.themeLight} transparent transparent transparent;
   }
 
   ${MyTooltip}:hover & {
     visibility: visible;
+    opacity: 1;
   }
 `;

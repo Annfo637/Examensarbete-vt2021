@@ -2,7 +2,7 @@ import React, { useRef, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContextProvider";
-import { StyledButton } from "../styles/CommonComponents";
+import { StyledButton } from "../styles/buttons";
 import {
   StyledForm,
   FormHeading,

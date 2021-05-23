@@ -1,18 +1,18 @@
 import styled from "styled-components";
+import { colors } from "./colors";
 
 export const MyTable = styled.table`
-  border: 1px solid #dee2e6;
+  border: 1px solid #dee2e6; //kollas
   border-spacing: 0;
   width: 100%;
-  //margin-bottom: 1rem;
-  color: #212529;
+  color: #212529; //kollas
   border-collapse: collapse;
 `;
 
 export const TableHeader = styled.thead`
   width: 100%;
-  background-color: #e7e7e7;
-  border-bottom: 1px solid #8d93a1;
+  background-color: ${colors.tableBackground};
+  border-bottom: 1px solid ${colors.themeLight};
 `;
 
 export const TableHeaderItem = styled.th`
@@ -25,7 +25,7 @@ export const TableBody = styled.tbody``;
 
 export const TableRow = styled.tr`
   :nth-child(even) {
-    background-color: #e7e7e7;
+    background-color: ${colors.tableBackground};
   }
 `;
 

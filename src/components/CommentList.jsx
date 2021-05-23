@@ -1,18 +1,14 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { db } from "../firebase";
-
 import { AuthContext } from "../contexts/AuthContextProvider";
 import { CommentContext } from "../contexts/CommentContextProvider";
 import {
   ContainerItem,
   MakePostContainer,
   PostContainer,
-} from "../styles/PageLayout";
-import {
-  PostButton,
-  ToggleButton,
-  CommentInput,
-} from "../styles/CommonComponents";
+} from "../styles/layouts/PageLayout";
+import { PostButton, ToggleButton } from "../styles/buttons";
+import { CommentInput } from "../styles/textareas";
 import CommentItem from "./CommentItem";
 
 export default function CommentList({ post }) {

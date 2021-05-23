@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
+import { MyCard } from "../styles/cards";
 import {
-  EditButton,
   ButtonIconWrapper,
-  MyCard,
-  PostInput,
   EditWrapper,
   PostWrapper,
-} from "../styles/CommonComponents";
+} from "../styles/wrappers";
+import { EditButton } from "../styles/buttons";
+import { PostInput } from "../styles/textareas";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { PostContext } from "../contexts/PostContextProvider";

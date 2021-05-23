@@ -49,7 +49,6 @@ export default function AuthContextProvider({ children }) {
       admin: true,
     };
 
-    console.log(newAdmin.admin);
     dbUsers
       .doc(userID)
       .delete()
@@ -133,7 +132,6 @@ export default function AuthContextProvider({ children }) {
       adminUsers.forEach((user) => {
         adminID.push(user.userID);
       });
-      console.log("inloggad user är admin:", adminID.includes(cred.user.uid));
       setIsAdmin(adminID.includes(cred.user.uid));
     });
   }

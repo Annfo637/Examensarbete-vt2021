@@ -5,8 +5,9 @@ import {
   ContainerItem,
   MakePostContainer,
   PostContainer,
-} from "../styles/PageLayout";
-import { PostButton, PostInput } from "../styles/CommonComponents";
+} from "../styles/layouts/PageLayout";
+import { PostButton } from "../styles/buttons";
+import { PostInput } from "../styles/textareas";
 import PostItem from "./PostItem";
 import styled from "styled-components";
 
@@ -19,9 +20,8 @@ const PendingUserNotice = styled.span`
 `;
 
 export default function PostListView() {
-  const { currentUser, currentUserDB, isAdmin, pendingUsers } = useContext(
-    AuthContext
-  );
+  const { currentUser, currentUserDB, isAdmin, pendingUsers } =
+    useContext(AuthContext);
   const { posts, getPosts, addPost } = useContext(PostContext);
 
   const postRef = useRef();
@@ -39,7 +39,7 @@ export default function PostListView() {
     if (isAdmin && pendingUsers.length > 0) {
       return (
         <PendingUserNotice>
-          Hej Admin! Du har ansökningar som väntar på godkännande.
+          Hej administratör! Du har ansökningar som väntar på godkännande.
         </PendingUserNotice>
       );
     }

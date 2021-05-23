@@ -5,8 +5,9 @@ import {
   ContainerItem,
   MakePostContainer,
   PostContainer,
-} from "../styles/PageLayout";
-import { PostButton, PostInput } from "../styles/CommonComponents";
+} from "../styles/layouts/PageLayout";
+import { PostButton } from "../styles/buttons";
+import { PostInput } from "../styles/textareas";
 import PostItem from "./PostItem";
 
 export default function UserPostList() {

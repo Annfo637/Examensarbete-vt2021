@@ -1,7 +1,8 @@
 /* fonts, colors etc used globally in the app */
 
 import { createGlobalStyle } from "styled-components";
-import "./fontImports.css";
+import "../styles/fonts/fontImports.css";
+import { colors } from "./colors";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -9,8 +10,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Source Sans Pro";
-  background-color: whitesmoke;
-  color: #2a2e30;
+  background-color: ${colors.bodyBackground};
+  color: ${colors.textDark};
 }
 `;
 export default GlobalStyle;

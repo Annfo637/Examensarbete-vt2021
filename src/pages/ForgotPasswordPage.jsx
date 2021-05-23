@@ -9,8 +9,8 @@ import {
   FormLabel,
   FormInput,
 } from "../styles/forms";
-import FormLayout from "../styles/FormLayout";
-import { StyledButton } from "../styles/CommonComponents";
+import FormLayout from "../styles/layouts/FormLayout";
+import { StyledButton } from "../styles/buttons";
 
 export default function ForgotPasswordPage() {
   const emailRef = useRef();
@@ -54,10 +54,6 @@ export default function ForgotPasswordPage() {
       </StyledForm>
       <div className="w-100 text-center mt-2">
         Tillbaka till <Link to="/login">inloggning</Link>
-      </div>
-
-      <div className="w-100 text-center mt-2">
-        Har du inget konto? <Link to="/register">Registrera ett här</Link>
       </div>
     </FormLayout>
   );

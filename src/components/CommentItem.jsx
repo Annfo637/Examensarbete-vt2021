@@ -1,12 +1,9 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import {
-  EditButton,
-  ButtonIconWrapper,
-  MyCard,
-  CommentInput,
-  EditWrapper,
-} from "../styles/CommonComponents";
+import { MyCard } from "../styles/cards";
+import { ButtonIconWrapper, EditWrapper } from "../styles/wrappers";
+import { EditButton } from "../styles/buttons";
+import { CommentInput } from "../styles/textareas";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { CommentContext } from "../contexts/CommentContextProvider";

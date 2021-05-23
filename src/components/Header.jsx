@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { colors } from "../styles/colors";
 
 const HeaderContainer = styled.header`
   position: relative;
   height: 250px;
   width: 100vw;
-  background: linear-gradient(to bottom, transparent, whitesmoke 95%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    ${colors.bodyBackground} 95%
+  );
 `;
 const HeaderImage = styled.img`
   width: 100%;
